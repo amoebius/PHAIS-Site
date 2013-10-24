@@ -18,7 +18,7 @@ class DBObject(object):
 		with db as c:
 
 			if kwargs:
-				c.execute('SELECT ' + ', '.join(self._dbo_properties) + ' FROM {} WHERE '.format(self._dbo_table) + ' AND '.join(key + '=%s' for key in kwargs.keys()), kwargs.values()])
+				c.execute('SELECT ' + ', '.join(self._dbo_properties) + ' FROM {} WHERE '.format(self._dbo_table) + ' AND '.join(key + '=%s' for key in kwargs.keys()), kwargs.values())
 			else:
 				c.execute('SELECT ' + ', '.join(self._dbo_properties) + ' FROM {}'.format(self._dbo_table))
 
@@ -41,4 +41,4 @@ class DBObject(object):
 
 			data = dict((prop, getattr(self,prop)) for prop in self._dbo_properties)
 
-			c.execute('UPDATE {} SET '.format(self._dbo_table) + ', '.join(key + '=%s' for key in kwargs.keys()), kwargs.values()])
+			c.execute('UPDATE {} SET '.format(self._dbo_table) + ', '.join(key + '=%s' for key in kwargs.keys()), kwargs.values())
