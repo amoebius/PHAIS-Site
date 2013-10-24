@@ -29,7 +29,7 @@ class DBObject(object):
 		return True
 
 
-	def _dbo_init(**kwargs):
+	def _dbo_init(self, **kwargs):
 		for key, value in kwargs.items():
 			# Possibility:  Prefix the attributes, or encapsulate them in an object?  This will be fine for now:
 			setattr(self, key, value)
