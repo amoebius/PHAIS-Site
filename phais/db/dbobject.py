@@ -18,7 +18,7 @@ class DBObject(object):
 		with db as c:
 
 			if kwargs:
-				c.execute('SELECT * FROM %s WHERE ' + ' AND '.join('?=?' for value in kwargs.values()), self._dbo_table, *[value for item in kwargs.items() for value in item])
+				c.execute('SELECT * FROM %s WHERE ' + ' AND '.join('?=?' for value in kwargs.values()), [self._dbo_table] + [value for item in kwargs.items() for value in item])
 			else:
 				c.execute('SELECT * FROM %s')
 
@@ -41,7 +41,7 @@ class DBObject(object):
 
 			data = dict((prop, getattr(self,prop)) for prop in self._dbo_properties)
 
-			c.execute('UPDATE %s SET ' + ', '.join('?=?' for value in data.values()), self._dbo_table, *[value for item in data.items() for value in item])
+			c.execute('UPDATE %s SET ' + ', '.join('?=?' for value in data.values()), [self._dbo_table] + [value for item in data.items() for value in item])
 
 
 	def _dbo_format(self, item):
