@@ -9,3 +9,5 @@ from .dbobject import DBObject
 from .user import User
 
 u = User(0)
+u.password = 'aaa'
+u.save()
