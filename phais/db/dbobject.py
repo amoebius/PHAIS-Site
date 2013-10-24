@@ -41,4 +41,4 @@ class DBObject(object):
 
 			data = dict((prop, getattr(self,prop)) for prop in self._dbo_properties)
 
-			c.execute('UPDATE {} SET '.format(self._dbo_table) + ', '.join(key + '=%s' for key in kwargs.keys()), kwargs.values())
+			c.execute('UPDATE {} SET '.format(self._dbo_table) + ', '.join(key + '=%s' for key in data.keys()), data.values())
