@@ -18,7 +18,7 @@ class DBObject(object):
 		with db as c:
 
 			if kwargs:
-				c.execute('SELECT * FROM %s WHERE ' + ' AND '.join('%s=%s' for i in range(len(kwargs)), [self._dbo_table] + [value for item in kwargs.items() for value in item])
+				c.execute('SELECT * FROM %s WHERE ' + ' AND '.join('%s=%s' for i in range(len(kwargs))), [self._dbo_table] + [value for item in kwargs.items() for value in item])
 			else:
 				c.execute('SELECT * FROM %s')
 
