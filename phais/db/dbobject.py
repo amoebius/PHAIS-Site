@@ -36,3 +36,15 @@ class DBObject(object):
 			data = dict((prop, getattr(self,prop)) for prop in self.dbproperties.keys())
 
 			c.execute('UPDATE {} SET '.format(self.dbtable) + ', '.join(key + '=%s' for key in data.keys()), data.values())
+
+
+	@classmethod
+	def new(cls, **kwargs):
+		for key in self.dbproperties.keys():
+			if key not in kwargs:
+				raise ValueError('Expected parameter "{}" not passed in creating new database record in the "{}" table.'.format(key, self.dbtable))
+
+		with db as c:
+			c.execute('INSERT INTO {} ('.format(self.dbname) + ', '.join(sorted(self.dbproperties.keys())) + ') VALUES (' + '%s, ' * len(self.dbproperties) + ')',
+				      [dbtype(kwargs[key]) for key, dbtype in sorted(self.dbproperties.items())])
+			print c.fetchall()
