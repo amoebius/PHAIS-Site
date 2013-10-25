@@ -19,9 +19,9 @@ class Table(object):
 				c.execute("SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'phais'")
 				columns = set(result['column_name'] for result in c)
 
-			if self.properties != columns:
+			if set(self.properties.keys()) | {'id'} != columns:
 				raise DBTableFormatException('Table "{}" does not have the expected format.\n'.format(self.name) +
-				                             'Columns expected were {}, but the columns were {}.\n'.format(str(self.properties), str(columns)) +
+				                             'Columns expected were {}, but the columns were {}.\n'.format(set(self.properties.keys) | {'id'}, str(columns)) +
 				                             'To have this table recreated, delete it first.  Otherwise fix the expected properties listing.')
 
 		else:
