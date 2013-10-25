@@ -4,7 +4,9 @@ from .types import T
 
 with db as c:
 	c.execute("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'phais'")
-	tables = set(result['table_name'] for result in c)
+	existing = set(result['table_name'] for result in c)
+
+registered = dict()
 
 class Table(object):
 	
@@ -28,3 +30,10 @@ class Table(object):
 				c.execute('CREATE TABLE {} (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, '.format(self.name) +
 				          ', '.join('{} {}'.format(name, T(data)) for name, data in self.properties.items()) +
 				          ')')
+
+			existing.add(self.name)
+
+
+def register(dbobject):
+	if dbobject.dbname not in registered:
+		registered[dbobject.dbname] = Table(dbobject.dbname, dbobject.dbproperties)
