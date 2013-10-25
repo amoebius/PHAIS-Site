@@ -1,4 +1,5 @@
 from . import db
+from .exception import DBInvalidObjectException
 
 # Possible extensions:
 # - Provide querying interface involving conditionals etc.
@@ -7,7 +8,7 @@ from . import db
 class DBObject(object):
 	
 	def __init__(self):
-		pass
+		pass # Currently unused!
 
 
 	def load(self, **kwargs):
@@ -20,16 +21,19 @@ class DBObject(object):
 
 			self._dbo_init(**c.fetchone())
 
+		self._validate()
 		return True
 
 
 	def _dbo_init(self, **kwargs):
+		
 		for key, value in kwargs.items():
 			# Possibility:  Prefix the attributes, or encapsulate them in an object?  This will be fine for now:
 			setattr(self, key, value)
 
 
 	def save(self):
+		if not dbvalid: raise DBInvalidObjectException
 
 		with db as c:
 
@@ -38,17 +42,41 @@ class DBObject(object):
 			c.execute('UPDATE {} SET '.format(self.dbtable) + ', '.join(key + '=%s' for key in data.keys()), data.values())
 
 
+	def delete(self):
+		if not dbvalid: raise DBInvalidObjectException
+
+		with db as c:
+			# Delete the record with this id:
+			c.execute('DELETE FROM {} WHERE id=%s'.format(self.dbtable), [self.id])
+		
+		self._invalidate()
+
+
 	@classmethod
 	def new(cls, **kwargs):
+		
 		for key in kwargs.keys():
 			if key not in cls.dbproperties:
+		
 				if key == 'id':
 					raise ValueError('An "id" parameter was passed in creating a new record in the {} table.  This is an automatic, compulsory field, and must not be specified.'.format(cls.dbtable))
 				else:
 					raise ValueError('Parameter "{}" passed in creating new database record in the "{}" table does not occur in the database schema.'.format(key, cls.dbtable))
 
+
 		with db as c:
+
 			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(sorted(kwargs.keys())) + ') VALUES (' + ', '.join('%s' for i in range(len(kwargs))) + ')',
 				      [dbtype(kwargs[key]) for key, dbtype in sorted(cls.dbproperties.items())])
 			
 			return cls(id=c.lastrowid)
+
+
+	dbvalid = False
+	def _validate(self):
+		if not dbvalid: dbvalid = True
+	def _invalidate(self):
+		if dbvalid: dbvalid = False
+
+	def __nonzero__(self):
+		return dbvalid
