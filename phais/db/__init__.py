@@ -11,5 +11,3 @@ from . import tables
 
 for obj in [User]:
 	tables.register(obj)
-
-User.new(name='James', email='bleh', password='heh', username='moebius')
