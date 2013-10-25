@@ -79,4 +79,4 @@ class DBObject(object):
 		if self._dbvalid: self._dbvalid = False
 
 	def __nonzero__(self):
-		return dbvalid
+		return self._dbvalid
