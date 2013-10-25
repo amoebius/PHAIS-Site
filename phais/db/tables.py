@@ -35,5 +35,5 @@ class Table(object):
 
 
 def register(dbobject):
-	if dbobject.dbname not in registered:
-		registered[dbobject.dbname] = Table(dbobject.dbname, dbobject.dbproperties)
+	if dbobject.dbtable not in registered:
+		registered[dbobject.dbtable] = Table(dbobject.dbtable, dbobject.dbproperties)
