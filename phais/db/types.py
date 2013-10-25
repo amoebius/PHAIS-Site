@@ -1,9 +1,9 @@
 
 type_mapping = {
 
-	int = 'INT',
-	str = 'TEXT',
-	float = 'DOUBLE',
+	int:   'INT',
+	str:   'TEXT',
+	float: 'DOUBLE',
 
 }
 
