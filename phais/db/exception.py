@@ -4,3 +4,6 @@ class DBException(Exception):
 
 class DBTableFormatException(DBException):
 	pass
+
+class DBInvalidObjectException(DBException):
+	pass
