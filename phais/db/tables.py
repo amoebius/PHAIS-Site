@@ -14,7 +14,7 @@ class Table(object):
 		self.name = name
 		self.properties = dict((key, val) for key, val in properties.items() if key != 'id')
 
-		if name in tables:
+		if name in existing:
 			with db as c:
 				c.execute("SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'phais'")
 				columns = set(result['column_name'] for result in c)
@@ -28,7 +28,7 @@ class Table(object):
 			# Create the table!
 			with db as c:
 				c.execute('CREATE TABLE {} (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, '.format(self.name) +
-				          ', '.join('{} {}'.format(name, T(data)) for name, data in self.properties.items()) +
+				          ', '.join('{} {}'.format(name, T(data)) for name, data in sorted(self.properties.items())) +
 				          ')')
 
 			existing.add(self.name)
