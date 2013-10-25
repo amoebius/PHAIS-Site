@@ -10,4 +10,4 @@ from .user import User
 from . import tables
 
 for obj in [User]:
-	tables.register(obj.dbtable, obj.dbproperties)
+	tables.register(obj)
