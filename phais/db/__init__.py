@@ -1,4 +1,4 @@
-from MySQLdb import connect, paramstyle
+from MySQLdb import connect
 from .cursor import Cursor
 from phais import app
 
