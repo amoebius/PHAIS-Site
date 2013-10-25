@@ -33,7 +33,7 @@ class DBObject(object):
 
 
 	def save(self):
-		if not dbvalid: raise DBInvalidObjectException
+		if not self: raise DBInvalidObjectException
 
 		with db as c:
 
@@ -43,7 +43,7 @@ class DBObject(object):
 
 
 	def delete(self):
-		if not dbvalid: raise DBInvalidObjectException
+		if not self: raise DBInvalidObjectException
 
 		with db as c:
 			# Delete the record with this id:
@@ -72,11 +72,11 @@ class DBObject(object):
 			return cls(id=c.lastrowid)
 
 
-	dbvalid = False
+	_dbvalid = False
 	def _validate(self):
-		if not dbvalid: dbvalid = True
+		if not self._dbvalid: self._dbvalid = True
 	def _invalidate(self):
-		if dbvalid: dbvalid = False
+		if self._dbvalid: self._dbvalid = False
 
 	def __nonzero__(self):
 		return dbvalid
