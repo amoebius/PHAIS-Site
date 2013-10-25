@@ -40,11 +40,12 @@ class DBObject(object):
 
 	@classmethod
 	def new(cls, **kwargs):
-		for key in self.dbproperties.keys():
+		for key in cls.dbproperties.keys():
 			if key not in kwargs:
-				raise ValueError('Expected parameter "{}" not passed in creating new database record in the "{}" table.'.format(key, self.dbtable))
+				raise ValueError('Expected parameter "{}" not passed in creating new database record in the "{}" table.'.format(key, cls.dbtable))
 
 		with db as c:
-			c.execute('INSERT INTO {} ('.format(self.dbname) + ', '.join(sorted(self.dbproperties.keys())) + ') VALUES (' + '%s, ' * len(self.dbproperties) + ')',
-				      [dbtype(kwargs[key]) for key, dbtype in sorted(self.dbproperties.items())])
-			print c.fetchall()
+			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(sorted(cls.dbproperties.keys())) + ') VALUES (' + ', '.join('%s' for i in range(len(cls.dbproperties))) + ')',
+				      [dbtype(kwargs[key]) for key, dbtype in sorted(cls.dbproperties.items())])
+			
+			return cls(id=c.lastrowid)
