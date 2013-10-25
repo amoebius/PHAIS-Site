@@ -40,12 +40,15 @@ class DBObject(object):
 
 	@classmethod
 	def new(cls, **kwargs):
-		for key in cls.dbproperties.keys():
-			if key not in kwargs:
-				raise ValueError('Expected parameter "{}" not passed in creating new database record in the "{}" table.'.format(key, cls.dbtable))
+		for key in kwargs.keys():
+			if key not in cls.dbproperties:
+				if key == 'id':
+					raise ValueError('An "id" parameter was passed in creating a new record in the {} table.  This is an automatic, compulsory field, and must not be specified.'.format(cls.dbtable))
+				else:
+					raise ValueError('Parameter "{}" passed in creating new database record in the "{}" table does not occur in the database schema.'.format(key, cls.dbtable))
 
 		with db as c:
-			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(sorted(cls.dbproperties.keys())) + ') VALUES (' + ', '.join('%s' for i in range(len(cls.dbproperties))) + ')',
+			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(sorted(kwargs.keys())) + ') VALUES (' + ', '.join('%s' for i in range(len(kwargs))) + ')',
 				      [dbtype(kwargs[key]) for key, dbtype in sorted(cls.dbproperties.items())])
 			
 			return cls(id=c.lastrowid)
