@@ -8,7 +8,7 @@ class DBObject(object):
 	
 	def __init__(self, table, properties, **kwargs):
 		self._dbo_table = table
-		self._dbo_properties = set(properties)
+		self._dbo_properties = dict((name, data) for name, data in properties.items() if name != 'id')
 		if kwargs:
 			self._dbo_load(**kwargs)
 
@@ -17,10 +17,7 @@ class DBObject(object):
 
 		with db as c:
 
-			if kwargs:
-				c.execute('SELECT ' + ', '.join(self._dbo_properties) + ' FROM {} WHERE '.format(self._dbo_table) + ' AND '.join(key + '=%s' for key in kwargs.keys()), kwargs.values())
-			else:
-				c.execute('SELECT ' + ', '.join(self._dbo_properties) + ' FROM {}'.format(self._dbo_table))
+			c.execute('SELECT ' + ', '.join(self._dbo_properties.keys()) + ' FROM {} WHERE '.format(self._dbo_table) + ' AND '.join(key + '=%s' for key in kwargs.keys()) + ' LIMIT 1', kwargs.values())
 
 			if not c: return False
 
@@ -39,6 +36,9 @@ class DBObject(object):
 
 		with db as c:
 
-			data = dict((prop, getattr(self,prop)) for prop in self._dbo_properties)
+			data = dict((prop, getattr(self,prop)) for prop in self._dbo_properties.keys())
 
 			c.execute('UPDATE {} SET '.format(self._dbo_table) + ', '.join(key + '=%s' for key in data.keys()), data.values())
+
+	save = _dbo_save
+	load = _dbo_load
