@@ -21,7 +21,7 @@ class Table(object):
 
 			if set(self.properties.keys()) | {'id'} != columns:
 				raise DBTableFormatException('Table "{}" does not have the expected format.\n'.format(self.name) +
-				                             'Columns expected were {}, but the columns were {}.\n'.format(set(self.properties.keys) | {'id'}, str(columns)) +
+				                             'Columns expected were {}, but the columns were {}.\n'.format(set(self.properties.keys()) | {'id'}, str(columns)) +
 				                             'To have this table recreated, delete it first.  Otherwise fix the expected properties listing.')
 
 		else:
