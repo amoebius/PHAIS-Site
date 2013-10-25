@@ -27,7 +27,7 @@ class Table(object):
 		else:
 			# Create the table!
 			with db as c:
-				c.execute('CREATE TABLE {} (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, '.format(self.name) +
+				c.execute('CREATE TABLE {} (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT'.format(self.name) + (', ' if len(self.properties) else ' ') +
 				          ', '.join('{} {}'.format(name, T(data)) for name, data in sorted(self.properties.items())) +
 				          ')')
 
