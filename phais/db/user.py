@@ -3,7 +3,4 @@ from . import DBObject
 class User(DBObject):
 
 	def __init__(self, uid):
-		super(User, self).__init__('user', {'username', 'email', 'password', 'id', 'name'}, id=uid)
-
-	def save(self):
-		self._dbo_save()
+		super(User, self).__init__('user', {'username': str, 'email': str, 'password': str, 'name': str}, id=uid)
