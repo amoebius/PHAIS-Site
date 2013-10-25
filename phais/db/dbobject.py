@@ -13,9 +13,14 @@ class DBObject(object):
 
 	def load(self, **kwargs):
 
+		self._invalidate()
+
 		with db as c:
 
-			c.execute('SELECT ' + ', '.join(self.dbproperties.keys()) + ' FROM {} WHERE '.format(self.dbtable) + ' AND '.join(key + '=%s' for key in kwargs.keys()) + ' LIMIT 1', kwargs.values())
+			c.execute('SELECT id' + (', ' if len(self.dbproperties) else ' ') +
+				      ', '.join(self.dbproperties.keys()) + ' FROM {} WHERE '.format(self.dbtable) +
+				      ' AND '.join(key + '=%s' for key in kwargs.keys()) + ' LIMIT 1',
+				      kwargs.values())
 
 			if not c: return False
 
@@ -39,7 +44,10 @@ class DBObject(object):
 
 			data = dict((prop, getattr(self,prop)) for prop in self.dbproperties.keys())
 
-			c.execute('UPDATE {} SET '.format(self.dbtable) + ', '.join(key + '=%s' for key in data.keys()), data.values())
+			c.execute('UPDATE {} SET '.format(self.dbtable) +
+				      ', '.join(key + '=%s' for key in data.keys()) +
+				      ' WHERE id={}'.format(self.id),
+				      data.values())
 
 
 	def delete(self):
@@ -59,7 +67,8 @@ class DBObject(object):
 			if key not in cls.dbproperties:
 		
 				if key == 'id':
-					raise ValueError('An "id" parameter was passed in creating a new record in the {} table.  This is an automatic, compulsory field, and must not be specified.'.format(cls.dbtable))
+					raise ValueError('An "id" parameter was passed in creating a new record in the {} table.  ' +
+						             'This is an automatic, compulsory field, and must not be specified.'.format(cls.dbtable))
 				else:
 					raise ValueError('Parameter "{}" passed in creating new database record in the "{}" table does not occur in the database schema.'.format(key, cls.dbtable))
 
