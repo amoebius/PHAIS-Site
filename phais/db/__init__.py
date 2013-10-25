@@ -7,7 +7,4 @@ db = connect(user = dbconfig.user, passwd = dbconfig.passwd, db = dbconfig.db, c
 
 from .dbobject import DBObject
 from .user import User
-
-u = User(0)
-u.password = 'aaa'
-u.save()
+import .tables
