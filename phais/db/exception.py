@@ -1,9 +1,9 @@
 
 class DBException(Exception):
-	pass
+	''' Database exceptions base class. '''
 
 class DBTableFormatException(DBException):
-	pass
+	''' Represents an error in a database table's format. '''
 
 class DBInvalidObjectException(DBException):
-	pass
+	''' Represents an error where an invalid database object has been acted upon. '''
