@@ -17,7 +17,7 @@ class DBObject(object):
 	records.  Note that a numeric 'id' field is automatically created and loaded, and must not be specified in
 	'dbproperties' or altered.
 	'''
-	
+
 	
 	def __init__(self):
 		pass # Currently unused!
@@ -27,6 +27,10 @@ class DBObject(object):
 		''' Loads a record from the database matching the parameters given as keyword arguments. '''
 
 		self._invalidate()
+
+		# Ensure id is an integer:
+		if 'id' in kwargs:
+			kwargs['id'] = int(kwargs['id'])
 
 		with db as c:
 
