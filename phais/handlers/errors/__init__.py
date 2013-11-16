@@ -1,1 +1,1 @@
-import error_404
+import 404
