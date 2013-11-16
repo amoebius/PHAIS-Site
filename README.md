@@ -13,7 +13,7 @@ This website most likely requires:
 - Back-end session management to allow users to interact with their bots and asychronously view the results of games they initiate for testing purposes
 - A back-end interface that abstracts independent systems for running bots under a common interface, with all forms of sandboxing and error handling
 
-...none of which have been implemented, so this represents a TODO list.
+...none of which have been implemented, so this represents a TODO list :)
 
 
 Current dependencies:
@@ -21,5 +21,5 @@ Current dependencies:
 - Flask
 - MySQLdb https://github.com/farcepest/MySQLdb1 (though easily adaptable to use any compatible database api)
 - Flask-Login https://github.com/maxcountryman/flask-login
-- Flask-OpenID http://github.com/mitsuhiko/flask-openid/ (probably)
-- Flask-Sijax https://github.com/spantaleev/flask-sijax (probably)
+- [Flask-OpenID http://github.com/mitsuhiko/flask-openid/] (probably)
+- [Flask-Sijax https://github.com/spantaleev/flask-sijax] (probably)
