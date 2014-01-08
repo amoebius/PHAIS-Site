@@ -20,6 +20,8 @@ Current dependencies:
 - Python 2.x
 - Flask
 - MySQLdb https://github.com/farcepest/MySQLdb1 (though easily adaptable to use any compatible database api)
+
+Future dependencies:
 - Flask-Login https://github.com/maxcountryman/flask-login
-- [Flask-OpenID http://github.com/mitsuhiko/flask-openid/] (probably)
-- [Flask-Sijax https://github.com/spantaleev/flask-sijax] (probably)
+- Flask-OpenID http://github.com/mitsuhiko/flask-openid/ (probably)
+- Flask-Sijax https://github.com/spantaleev/flask-sijax (possibly)

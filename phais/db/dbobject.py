@@ -1,5 +1,6 @@
-from . import db
+from . import dbc
 from .exception import DBInvalidObjectException
+from .dbtype import DBType
 
 # Possible extensions:
 # - Provide querying interface involving conditionals etc.
@@ -18,6 +19,8 @@ class DBObject(object):
 	'dbproperties' or altered.
 	'''
 
+	# DBObject derived classes will be instances of the DBType metaclass:
+	__metaclass__ = DBType
 	
 	def __init__(self):
 		pass # Currently unused!
@@ -32,12 +35,14 @@ class DBObject(object):
 		if 'id' in kwargs:
 			kwargs['id'] = int(kwargs['id'])
 
-		with db as c:
+		with dbc as c:
+
+			properties = kwargs.items()
 
 			c.execute('SELECT id' + (', ' if len(self.dbproperties) else ' ') +
 				      ', '.join(self.dbproperties.keys()) + ' FROM {} WHERE '.format(self.dbtable) +
-				      ' AND '.join(key + '=%s' for key in kwargs.keys()) + ' LIMIT 1',
-				      kwargs.values())
+				      ' AND '.join(key + '=%s' for key, _ in properties) + ' LIMIT 1',
+				      [value for _, value in properties])
 
 			if not c: return False
 
@@ -60,7 +65,7 @@ class DBObject(object):
 
 		if not self: raise DBInvalidObjectException
 
-		with db as c:
+		with dbc as c:
 
 			data = dict((prop, getattr(self,prop)) for prop in self.dbproperties.keys())
 
@@ -77,7 +82,7 @@ class DBObject(object):
 
 		if not self: raise DBInvalidObjectException
 
-		with db as c:
+		with dbc as c:
 			# Delete the record with this id:
 			c.execute('DELETE FROM {} WHERE id=%s'.format(self.dbtable), [self.id])
 
@@ -101,7 +106,7 @@ class DBObject(object):
 					raise ValueError('Parameter "{}" passed in creating new database record in the "{}" table does not occur in the database schema.'.format(key, cls.dbtable))
 
 
-		with db as c:
+		with dbc as c:
 
 			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(sorted(kwargs.keys())) + ') VALUES (' + ', '.join('%s' for i in range(len(kwargs))) + ')',
 				      [dbtype(kwargs[key]) for key, dbtype in sorted(cls.dbproperties.items())])

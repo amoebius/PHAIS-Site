@@ -4,3 +4,4 @@ from MySQLdb.cursors import DictCursor
 # Far more impressive functionality is expected.
 class Cursor(DictCursor):
 	__len__ = rows = lambda self: max(self.rowcount, 0)
+	__nonzero__ = lambda self: len(self) > 0
