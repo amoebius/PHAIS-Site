@@ -1,6 +1,7 @@
 from . import dbc
 from .exception import DBInvalidObjectException
 from .dbtype import DBType
+from . import types
 
 # Possible extensions:
 # - Provide querying interface involving conditionals etc.
@@ -21,99 +22,126 @@ class DBObject(object):
 
 	# DBObject derived classes will be instances of the DBType metaclass:
 	__metaclass__ = DBType
+
+
+	class Meta(DBType.Abstract):
+		pass
 	
 	def __init__(self):
-		pass # Currently unused!
+		pass
 
 
 	def load(self, **kwargs):
 		''' Loads a record from the database matching the parameters given as keyword arguments. '''
 
-		self._invalidate()
+		for key in kwargs.keys():
+			if key not in cls.Meta.fields:
+				raise ValueError('Parameter "{}" passed for loading a database record in the "{}" table does not occur in the table schema.'.format(key, cls.Meta.table))
 
-		# Ensure id is an integer:
-		if 'id' in kwargs:
-			kwargs['id'] = int(kwargs['id'])
+		self._invalidate()
 
 		with dbc as c:
 
-			properties = kwargs.items()
+			properties = sorted(kwargs.items())
+			fields = self.Meta.fields
 
-			c.execute('SELECT id' + (', ' if len(self.dbproperties) else ' ') +
-				      ', '.join(self.dbproperties.keys()) + ' FROM {} WHERE '.format(self.dbtable) +
-				      ' AND '.join(key + '=%s' for key, _ in properties) + ' LIMIT 1',
-				      [value for _, value in properties])
+			c.execute('SELECT' + ', '.join(key for key, _ in properties) + ' FROM {} WHERE '.format(self.Meta.table) +
+				      ' AND '.join(key + ' = %s' for key, _ in properties) + ' LIMIT 1',
+				      [fields[key](value).get_value() for key, value in properties])
 
 			if not c: return False
 
-			self._dbo_init(**c.fetchone())
+			self.init(**c.fetchone())
 
 		self._validate()
 		return True
 
 
-	def _dbo_init(self, **kwargs):
-		''' Initialises the object based off properties passed as keyword arguments, set as attributes currently. '''
+	def init(self, **kwargs):
+		''' Initialises the object based off properties passed as keyword arguments. '''
 		
-		for key, value in kwargs.items():
-			# Possibility:  Prefix the attributes, or encapsulate them in an object?  This will be fine for now:
+		for key, dbtype in self.Meta.fields:
+			
+			if key not in kwargs:
+				if dbtype.db_nullable:
+					value = None
+				else:
+					raise DBInvalidObjectException('Non-nullable field "%s" was not passed to DBObject.init(self, **kwargs)!' % key)
+			else:
+				value = dbtype(kwargs[key])
+
 			setattr(self, key, value)
 
 
-	def save(self):
+	def save(self, **kwargs):
 		''' Saves any changes made to this record to the database. '''
 
 		if not self: raise DBInvalidObjectException
 
+		for key in kwargs.keys():
+			if key not in cls.Meta.fields:
+				raise ValueError('Parameter "{}" passed for saving a database record in the "{}" table does not occur in the table schema.'.format(key, cls.Meta.table))
+
 		with dbc as c:
 
-			data = dict((prop, getattr(self,prop)) for prop in self.dbproperties.keys())
+			fields = sorted(self.Meta.fields.keys())
+			properties = sorted(kwargs.items())
 
-			c.execute('UPDATE {} SET '.format(self.dbtable) +
-				      ', '.join(key + '=%s' for key in data.keys()) +
-				      ' WHERE id={}'.format(self.id),
-				      data.values())
+			c.execute('UPDATE {} SET '.format(self.Meta.table) +
+				      ', '.join(key + '= %s' for key in fields) +
+				      ' WHERE ' + ', '.join(key + '= %s' for key, _ in properties),
+				      [getattr(self, key) for key in fields] + [self.Meta.fields[key](value).get_value() for key, value in properties])
 
 			return True if c else False
 
 
-	def delete(self):
-		''' Deletes this record from the database. '''
+	@classmethod
+	def delete(cls, **kwargs):
+		''' Deletes all records matching the given arguments from the database. '''
 
-		if not self: raise DBInvalidObjectException
+		for key in kwargs.keys():
+			if key not in cls.Meta.fields:
+				raise ValueError('Parameter "{}" passed for deleting database records in the "{}" table does not occur in the table schema.'.format(key, cls.Meta.table))
+
+		properties = sorted(kwargs.items())
 
 		with dbc as c:
 			# Delete the record with this id:
-			c.execute('DELETE FROM {} WHERE id=%s'.format(self.dbtable), [self.id])
+			c.execute('DELETE FROM {} WHERE '.format(self.dbtable) + ', '.join(key + ' = %s' for key, _ in properties), [cls.Meta.fields[key](value) for key, value in properties])
 
-			if not c: return False
-
-		self._invalidate()
-		return True
+			return c.rowcount
 		
 
 	@classmethod
-	def new(cls, **kwargs):
-		''' Creates a new record with the given values (passed as keyword arguments), returning a new representative object on success and 'None' on failure. '''
+	def create(cls, **kwargs):
+		''' Creates a new record with the given values (passed as keyword arguments), returning a new id on success and 'None' on failure. '''
 		
 		for key in kwargs.keys():
-			if key not in cls.dbproperties:
-		
-				if key == 'id':
-					raise ValueError('An "id" parameter was passed in creating a new record in the {} table.  ' +
-						             'This is an automatic, compulsory field, and must not be specified.'.format(cls.dbtable))
+			if key not in cls.Meta.fields:
+				raise ValueError('Parameter "{}" passed in creating new database record in the "{}" table does not occur in the table schema.'.format(key, cls.Meta.table))
+
+		for field, dbtype in cls.Meta.fields.items():
+			if field not in kwargs:
+				if dbtype.db_nullable:
+					kwargs[field] = None
 				else:
-					raise ValueError('Parameter "{}" passed in creating new database record in the "{}" table does not occur in the database schema.'.format(key, cls.dbtable))
+					raise ValueError('Expected keyword parameter "{}" not given to DBObject.new!'.format(field))
+			else:
+				if dbtype.db_automatic:
+					raise ValueError('Automatic field "{}" given as keyword parameter to DBObject.new!'.format(field))
+				kwargs[field] = dbtype(kwargs[field])
 
 
 		with dbc as c:
 
-			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(sorted(kwargs.keys())) + ') VALUES (' + ', '.join('%s' for i in range(len(kwargs))) + ')',
-				      [dbtype(kwargs[key]) for key, dbtype in sorted(cls.dbproperties.items())])
+			properties = sorted(kwargs.items())
+
+			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(key for key, _ in properties) + ') VALUES (' + ', '.join('%s' for i in range(len(properties))) + ')',
+				      [value for _, value in properties])
 			
 			if not c: return None
 
-			return cls(id=c.lastrowid)
+		return types.DBId(c.lastrowid)
 
 
 
