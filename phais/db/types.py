@@ -5,9 +5,9 @@ class DBField(object):
 	db_nullable = False
 	db_automatic = False
 
-	@staticmethod
-	def get_create(name):
-		return name + ' ' + db_create
+	@classmethod
+	def get_create(cls, name):
+		return name + ' ' + cls.db_create
 
 	@classmethod
 	def verify(cls, dictCursor):
@@ -69,13 +69,3 @@ class DBStr(DBField, str):
 
 class DBBlank(DBField):
 	''' Used to remove an inherited field. '''
-
-def PrimaryKey(cls):
-	class PrimaryKey(cls):
-		db_create = cls.db_create + ' PRIMARY KEY'
-		@staticmethod
-		def get_sort_key():
-			return 1
-
-	PrimaryKey.__name__ = 'PrimaryKey(' + cls.__name__ + ')'
-	return PrimaryKey

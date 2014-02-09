@@ -7,7 +7,6 @@ none exist or raising an exception where the existing table does not match the s
 from . import dbc
 from .exception import DBTableFormatException, DBTypeException
 from . import types
-from .dbobject import DBObject
 
 class DBType(type):
 
@@ -27,7 +26,7 @@ class DBType(type):
 
 		if not issubclass(dbmeta, DBType.Meta):
 			raise DBTypeException('"Meta" attribute was not a subclass of DBType.Meta as expected in the definition of the "%s" class.' % name)
-		if dbmeta in (Meta, Abstract): # <- List of Metas we implement
+		if dbmeta in (DBType.Meta, DBType.Abstract): # <- List of Metas we implement
 			raise DBTypeException('"Meta" attribute must subclass DBType.Meta, not be a copy of these! (See definition of the "%s" class...)' % name)
 
 		
@@ -40,11 +39,11 @@ class DBType(type):
 				raise DBTypeException('"Meta.table" was not a string as expected in "%s" class.' % name)
 		
 		# Find all fields:
-		fields = dict((key, value) for key, value in attr.items() if issubclass(value, types.DBField))
+		fields = dict((key, value) for key, value in attr.items() if isinstance(value, type) and issubclass(value, types.DBField))
 
 		seen_classes = set()
 		def find_fields(cls):
-			if not issubclass(cls, DBObject) or cls in seen_classes:
+			if cls in seen_classes or not hasattr(cls, 'Meta') or not issubclass(cls.Meta, DBType.Meta):
 				return
 			seen_classes.add(cls)
 
@@ -71,32 +70,32 @@ class DBType(type):
 		if not dbmeta.abstract:
 			
 			with dbc as c:
-				c.execute("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'phais' AND table_name = %s" % dbmeta.table)
+				c.execute("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'phais' AND table_name = %s", [table])
 				
 				if c:
 					# If the table exists, verify that its schema matches that of the class:
-					c.execute("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'phais' AND table_name = %s" % dbmeta.table)
+					c.execute('SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = "phais" AND table_name = %s', [table])
 					results = list(c)
-
-					columns = set(result['column_name'] for result in results)
+					
+					columns = set(result['COLUMN_NAME'] for result in results)
 					if set(fields.keys()) - columns:
 						raise DBTableFormatException(
-							'Table "{}" does not have the expected format.\n'.format(dbmeta.table) +
+							'Table "{}" does not have the expected format.\n'.format(table) +
 						    'Columns expected were {}, but the columns were {}.\n'.format(
 						    	str(sorted(set(fields.keys()) | {'id'})), str(sorted(columns))) +
 						    'To have this table recreated, delete it first.  Otherwise, alter the table schema.')
 
 					for result in results:
-						if not field[result['column_name']].verify(result):
+						if not fields[result['COLUMN_NAME']].verify(result):
 							raise DBTableFormatException(
-								'Table "{}" does not have the expected format.\n'.format(dbmeta.table) +
-								'Column "{}" failed verification against the DBField type "{}".'.format(result['column_name'], field[result['column_name']].__name__)
+								'Table "{}" does not have the expected format.\n'.format(table) +
+								'Column "{}" failed verification against the DBField type "{}".'.format(result['COLUMN_NAME'], fields[result['COLUMN_NAME']].__name__)
 								)
 
 				else:
 					if not fields:
 						raise DBTypeException("No fields were found for DBType-derived class '%s'!" % name)
 					# Create the table!
-					c.execute('CREATE TABLE %s (' + ', '.join(dbfield.get_create(name) for name, dbfield in sorted(fields.items(), key = lambda item: (item[1].get_sort_key(), item[0])) + ')') + ')')
+					c.execute('CREATE TABLE {} ('.format(table) + ', '.join(dbtype.get_create(name) for name, dbtype in sorted(fields.items(), key = lambda item: (item[1].get_sort_key(), item[0]))) + ')')
 
-		super(DBType, meta).__new__(name, bases, attr)
+		return super(DBType, meta).__new__(meta, name, bases, attr)

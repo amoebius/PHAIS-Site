@@ -6,7 +6,7 @@ class User(db.DBObject):
 		table = 'user'
 
 	user_id  = db.types.DBId
-	username = db.types.PrimaryKey(db.types.DBStr)
+	username = db.types.DBStr
 	email    = db.types.DBStr
 	password = db.types.DBStr
 	name     = db.types.DBStr
