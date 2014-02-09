@@ -28,24 +28,24 @@ class DBObject(object):
 		pass
 	
 	def __init__(self):
-		pass
+		self.meta = self.Meta()
 
 
 	def load(self, **kwargs):
 		''' Loads a record from the database matching the parameters given as keyword arguments. '''
 
 		for key in kwargs.keys():
-			if key not in cls.Meta.fields:
-				raise ValueError('Parameter "{}" passed for loading a database record in the "{}" table does not occur in the table schema.'.format(key, cls.Meta.table))
+			if key not in self.meta.fields:
+				raise ValueError('Parameter "{}" passed for loading a database record in the "{}" table does not occur in the table schema.'.format(key, self.meta.table))
 
 		self._invalidate()
 
 		with dbc as c:
 
 			properties = sorted(kwargs.items())
-			fields = self.Meta.fields
+			fields = self.meta.fields
 
-			c.execute('SELECT' + ', '.join(key for key, _ in properties) + ' FROM {} WHERE '.format(self.Meta.table) +
+			c.execute('SELECT ' + ', '.join(fields.keys()) + ' FROM {} WHERE '.format(self.meta.table) +
 				      ' AND '.join(key + ' = %s' for key, _ in properties) + ' LIMIT 1',
 				      [fields[key](value).get_value() for key, value in properties])
 
@@ -59,8 +59,8 @@ class DBObject(object):
 
 	def init(self, **kwargs):
 		''' Initialises the object based off properties passed as keyword arguments. '''
-		
-		for key, dbtype in self.Meta.fields:
+
+		for key, dbtype in self.meta.fields.items():
 			
 			if key not in kwargs:
 				if dbtype.db_nullable:
@@ -70,27 +70,27 @@ class DBObject(object):
 			else:
 				value = dbtype(kwargs[key])
 
-			setattr(self, key, value)
+			self.meta.field_values[key] = value
 
 
 	def save(self, **kwargs):
 		''' Saves any changes made to this record to the database. '''
 
 		if not self: raise DBInvalidObjectException
-
+		
 		for key in kwargs.keys():
-			if key not in cls.Meta.fields:
+			if key not in self.meta.fields:
 				raise ValueError('Parameter "{}" passed for saving a database record in the "{}" table does not occur in the table schema.'.format(key, cls.Meta.table))
 
 		with dbc as c:
 
-			fields = sorted(self.Meta.fields.keys())
+			fields = sorted(self.meta.fields.keys())
 			properties = sorted(kwargs.items())
 
-			c.execute('UPDATE {} SET '.format(self.Meta.table) +
+			c.execute('UPDATE {} SET '.format(self.meta.table) +
 				      ', '.join(key + '= %s' for key in fields) +
 				      ' WHERE ' + ', '.join(key + '= %s' for key, _ in properties),
-				      [getattr(self, key) for key in fields] + [self.Meta.fields[key](value).get_value() for key, value in properties])
+				      [getattr(self, key) for key in fields] + [self.meta.fields[key](value).get_value() for key, value in properties])
 
 			return True if c else False
 
@@ -107,7 +107,7 @@ class DBObject(object):
 
 		with dbc as c:
 			# Delete the record with this id:
-			c.execute('DELETE FROM {} WHERE '.format(self.dbtable) + ', '.join(key + ' = %s' for key, _ in properties), [cls.Meta.fields[key](value) for key, value in properties])
+			c.execute('DELETE FROM {} WHERE '.format(cls.Meta.table) + ', '.join(key + ' = %s' for key, _ in properties), [cls.Meta.fields[key](value) for key, value in properties])
 
 			return c.rowcount
 		
@@ -124,7 +124,7 @@ class DBObject(object):
 			if field not in kwargs:
 				if dbtype.db_nullable:
 					kwargs[field] = None
-				else:
+				elif not dbtype.db_automatic:
 					raise ValueError('Expected keyword parameter "{}" not given to DBObject.new!'.format(field))
 			else:
 				if dbtype.db_automatic:
@@ -136,7 +136,7 @@ class DBObject(object):
 
 			properties = sorted(kwargs.items())
 
-			c.execute('INSERT INTO {} ('.format(cls.dbtable) + ', '.join(key for key, _ in properties) + ') VALUES (' + ', '.join('%s' for i in range(len(properties))) + ')',
+			c.execute('INSERT INTO {} ('.format(cls.Meta.table) + ', '.join(key for key, _ in properties) + ') VALUES (' + ', '.join('%s' for i in range(len(properties))) + ')',
 				      [value for _, value in properties])
 			
 			if not c: return None
@@ -158,3 +158,18 @@ class DBObject(object):
 	def __nonzero__(self):
 		''' Overrides 'nonzero' to check if the object is marked 'valid'. '''
 		return self._dbvalid
+
+
+	def __getattr__(self, attr):
+		if attr != 'meta' and attr in self.meta.fields:
+			return self.meta.field_values[attr].get_value()
+		raise AttributeError("Attribute '%s' not found." % attr)
+
+	def __setattr__(self, attr, value):
+		if hasattr(self, 'meta') and attr in self.meta.fields:
+			if self.meta.fields[attr].db_automatic:
+				raise AttributeError("Can't set attribute '%s'." % attr)
+			self.meta.field_values[attr] = self.meta.fields[attr](value)
+		else:
+			super(DBObject, self).__setattr__(attr, value)
+

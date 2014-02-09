@@ -20,6 +20,11 @@ class DBField(object):
 	def get_value(self):
 		raise NotImplementedError('Abstract method "get_value" called on DBField.')
 
+	def __new__(cls, value):
+		if value is None:
+			return None
+		return super(DBField, cls).__new__(cls, value)
+
 
 
 class DBId(DBField, int):

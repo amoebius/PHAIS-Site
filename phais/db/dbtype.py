@@ -12,6 +12,8 @@ class DBType(type):
 
 	class Meta(object):
 		abstract = False
+		def __init__(self):
+			self.field_values = dict((key, None) for key in self.fields)
 		
 	class Abstract(Meta):
 		abstract = True
@@ -56,10 +58,10 @@ class DBType(type):
 
 		dbmeta.fields = fields
 
-		# Remove fields from the class:
+		# Remove fields from the class definition:
 		for key in fields:
 			del attr[key]
-
+		
 		# Remove fields marked 'DBBlank':
 		useless_fields = [key for key, value in fields.items() if value is types.DBBlank]
 		for field in useless_fields:

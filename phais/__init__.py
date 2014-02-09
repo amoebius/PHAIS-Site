@@ -4,4 +4,5 @@ app = Flask('phais', instance_relative_config = True)
 app.config.from_pyfile('config.py')
 
 import handlers
-import models
+
+from models.user import User

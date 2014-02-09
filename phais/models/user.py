@@ -19,5 +19,5 @@ class User(db.DBObject):
 		super(User, self).save(user_id = self.user_id)
 
 	@classmethod
-	def create(cls, **kwargs):
-		return User(super(User, self).create(**kwargs))
+	def create(cls, username, password, name, email):
+		return User(super(User, cls).create(username = username, password = password, name = name, email = email))
