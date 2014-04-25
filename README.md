@@ -23,5 +23,6 @@ Current dependencies:
 
 Future dependencies:
 - Flask-Login https://github.com/maxcountryman/flask-login
+- mbox https://github.com/tsgates/mbox
 - Flask-OpenID http://github.com/mitsuhiko/flask-openid/ (probably)
 - Flask-Sijax https://github.com/spantaleev/flask-sijax (possibly)
