@@ -1,0 +1,1488 @@
+AustiBot versus tooBlindToSee size 40
+0 starts at 20 0
+1 starts at 20 39
+0 RGB 255 255 0
+1 RGB 48 48 48
+0 moved down to 20 1
+1 blocked 19 39
+0 blocked 20 0
+1 blocked 20 2
+0 blocked 35 0
+1 blocked 21 1
+0 blocked 19 0
+1 moved right to 21 39
+0 blocked 22 0
+1 moved up to 21 38
+0 blocked 23 0
+1 moved up to 21 37
+0 blocked 37 0
+1 moved up to 21 36
+0 blocked 31 0
+1 moved left to 20 36
+0 blocked 18 0
+1 moved up to 20 35
+0 blocked 17 0
+1 moved right to 21 35
+0 blocked 24 0
+1 moved right to 22 35
+0 blocked 25 0
+1 moved up to 22 34
+0 blocked 26 0
+1 moved up to 22 33
+0 blocked 27 0
+1 moved right to 23 33
+0 blocked 28 0
+1 moved up to 23 32
+0 blocked 29 0
+1 moved up to 23 31
+0 blocked 32 0
+1 moved left to 22 31
+0 blocked 16 0
+1 moved left to 21 31
+0 blocked 15 0
+1 moved up to 21 30
+0 blocked 14 0
+1 moved up to 21 29
+0 blocked 13 0
+1 moved left to 20 29
+0 blocked 12 0
+1 moved left to 19 29
+0 blocked 11 0
+1 moved left to 18 29
+0 blocked 10 0
+1 moved left to 17 29
+0 blocked 9 0
+1 moved left to 16 29
+0 blocked 8 0
+1 moved left to 15 29
+0 blocked 7 0
+1 moved left to 14 29
+0 blocked 6 0
+1 moved left to 13 29
+0 blocked 5 0
+1 moved left to 12 29
+0 blocked 4 0
+1 moved left to 11 29
+0 blocked 3 0
+1 moved left to 10 29
+0 blocked 2 0
+1 moved left to 9 29
+0 blocked 1 0
+1 moved left to 8 29
+0 blocked 0 0
+1 moved right to 9 29
+0 blocked 30 0
+1 moved up to 9 28
+0 blocked 33 0
+1 moved right to 10 28
+0 blocked 34 0
+1 moved up to 10 27
+0 blocked 36 0
+1 moved up to 10 26
+0 blocked 38 0
+1 moved right to 11 26
+0 blocked 21 0
+1 moved up to 11 25
+0 blocked 22 13
+1 moved right to 12 25
+0 blocked 27 39
+1 moved up to 12 24
+0 blocked 9 15
+1 moved right to 13 24
+0 blocked 34 28
+1 moved up to 13 23
+0 blocked 18 15
+1 blocked 19 2
+0 blocked 29 18
+1 blocked 17 14
+0 blocked 37 26
+1 moved right to 14 23
+0 blocked 24 21
+1 moved right to 15 23
+0 blocked 34 36
+1 moved up to 15 22
+0 blocked 37 32
+1 moved up to 15 21
+0 blocked 22 24
+1 moved up to 15 20
+0 blocked 32 2
+1 moved right to 16 20
+0 blocked 23 15
+1 moved right to 17 20
+0 blocked 24 16
+1 moved up to 17 19
+0 blocked 17 33
+1 moved up to 17 18
+0 blocked 6 7
+1 moved up to 17 17
+0 blocked 18 28
+1 moved up to 17 16
+0 blocked 18 16
+1 moved down to 17 17
+0 blocked 18 17
+1 moved down to 17 18
+0 blocked 18 18
+1 moved down to 17 19
+0 blocked 19 19
+1 moved right to 18 19
+0 blocked 20 20
+1 blocked 16 13
+0 blocked 18 20
+1 moved left to 17 19
+0 blocked 16 17
+1 moved up to 17 18
+0 blocked 15 12
+1 blocked 18 2
+0 blocked 29 6
+1 blocked 14 11
+0 blocked 17 19
+1 moved left to 16 18
+0 blocked 29 30
+1 moved down to 16 19
+0 blocked 18 21
+1 moved down to 16 20
+0 blocked 17 22
+1 moved down to 16 21
+0 blocked 16 23
+1 moved left to 15 21
+0 blocked 13 12
+1 blocked 17 2
+0 blocked 7 3
+1 blocked 12 11
+0 blocked 15 23
+1 moved left to 14 21
+0 blocked 11 35
+1 blocked 16 2
+0 blocked 12 15
+1 moved down to 14 22
+0 blocked 14 23
+1 moved left to 13 22
+0 blocked 4 29
+1 moved down to 13 23
+0 blocked 16 24
+1 moved down to 13 24
+0 blocked 15 25
+1 moved down to 13 25
+0 blocked 14 26
+1 moved down to 13 26
+0 blocked 15 27
+1 moved down to 13 27
+0 blocked 16 28
+1 moved right to 14 27
+0 blocked 14 28
+1 moved left to 13 27
+0 blocked 35 18
+1 moved left to 12 27
+0 blocked 11 13
+1 blocked 10 12
+0 blocked 33 31
+1 moved up to 12 26
+0 blocked 11 12
+1 blocked 15 2
+0 blocked 23 1
+1 moved left to 11 26
+0 blocked 9 12
+1 blocked 8 11
+0 blocked 17 29
+1 moved left to 10 26
+0 blocked 7 12
+1 blocked 14 2
+0 blocked 30 30
+1 blocked 6 11
+0 blocked 16 30
+1 moved down to 10 27
+0 blocked 16 31
+1 moved right to 11 27
+0 blocked 17 32
+1 moved left to 10 27
+0 blocked 5 12
+1 blocked 13 2
+0 blocked 4 12
+1 moved up to 10 26
+0 blocked 3 12
+1 blocked 12 2
+0 blocked 8 33
+1 blocked 2 11
+0 blocked 18 34
+1 moved down to 10 27
+0 blocked 19 35
+1 moved right to 11 27
+0 blocked 19 36
+1 moved right to 12 27
+0 blocked 19 37
+1 moved left to 11 27
+0 blocked 1 11
+1 blocked 11 2
+0 blocked 23 18
+1 blocked 0 10
+0 blocked 26 22
+1 blocked 10 2
+0 blocked 10 3
+1 blocked 9 2
+0 blocked 12 20
+1 blocked 8 2
+0 blocked 29 13
+1 blocked 6 2
+0 blocked 1 14
+1 blocked 5 2
+0 blocked 26 2
+1 blocked 4 2
+0 blocked 27 33
+1 blocked 3 2
+0 blocked 11 30
+1 blocked 2 2
+0 blocked 35 14
+1 blocked 1 2
+0 blocked 38 21
+1 blocked 21 19
+0 blocked 3 16
+1 blocked 22 18
+0 blocked 11 16
+1 moved right to 12 27
+0 blocked 34 17
+1 moved down to 12 28
+0 blocked 22 28
+1 moved right to 13 28
+0 blocked 13 29
+1 moved left to 12 28
+0 blocked 12 29
+1 moved left to 11 28
+0 blocked 10 31
+1 moved down to 11 29
+0 blocked 9 32
+1 moved left to 10 29
+0 blocked 7 32
+1 moved down to 10 30
+0 blocked 9 30
+1 moved up to 10 29
+0 blocked 6 32
+1 moved left to 9 29
+0 blocked 5 33
+1 moved left to 8 29
+0 blocked 4 34
+1 moved down to 8 30
+0 blocked 3 35
+1 moved left to 7 30
+0 blocked 2 34
+1 moved down to 7 31
+0 blocked 1 35
+1 moved left to 6 31
+0 blocked 5 31
+1 moved up to 6 30
+0 blocked 5 30
+1 moved up to 6 29
+0 blocked 4 28
+1 moved up to 6 28
+0 blocked 4 27
+1 moved left to 5 28
+0 blocked 5 26
+1 moved right to 6 28
+0 blocked 6 25
+1 moved right to 7 28
+0 blocked 7 24
+1 moved up to 7 27
+0 blocked 8 23
+1 moved right to 8 27
+0 blocked 9 22
+1 moved up to 8 26
+0 blocked 10 21
+1 moved right to 9 26
+0 blocked 11 20
+1 moved right to 10 26
+0 blocked 13 19
+1 moved up to 10 25
+0 blocked 14 18
+1 moved up to 10 24
+0 blocked 15 18
+1 moved up to 10 23
+0 blocked 15 16
+1 moved up to 10 22
+0 blocked 14 15
+1 moved right to 11 22
+0 blocked 14 14
+1 moved up to 11 21
+0 blocked 12 21
+1 moved down to 11 22
+0 blocked 12 22
+1 moved down to 11 23
+0 blocked 12 23
+1 moved down to 11 24
+0 blocked 12 24
+1 moved down to 11 25
+0 blocked 12 25
+1 moved down to 11 26
+0 blocked 12 26
+1 moved down to 11 27
+0 blocked 12 27
+1 moved down to 11 28
+0 blocked 24 35
+1 moved right to 12 28
+0 blocked 20 18
+1 moved right to 13 28
+0 blocked 19 20
+1 moved up to 13 27
+0 blocked 3 7
+1 moved up to 13 26
+0 blocked 19 23
+1 moved up to 13 25
+0 blocked 9 8
+1 moved up to 13 24
+0 blocked 26 15
+1 moved up to 13 23
+0 blocked 32 26
+1 moved up to 13 22
+0 blocked 17 30
+1 moved up to 13 21
+0 blocked 29 1
+1 moved up to 13 20
+0 blocked 14 20
+1 moved down to 13 21
+0 blocked 14 21
+1 moved down to 13 22
+0 blocked 22 17
+1 moved right to 14 22
+0 blocked 9 19
+1 moved right to 15 22
+0 blocked 39 31
+1 moved right to 16 22
+0 blocked 16 21
+1 moved left to 15 22
+0 blocked 29 14
+1 moved up to 15 21
+0 blocked 3 25
+1 moved up to 15 20
+0 blocked 6 9
+1 moved up to 15 19
+0 blocked 24 3
+1 moved right to 16 19
+0 blocked 4 33
+1 moved up to 16 18
+0 blocked 28 37
+1 moved right to 17 18
+0 blocked 8 27
+1 moved up to 17 17
+0 blocked 22 10
+1 moved up to 17 16
+0 blocked 25 5
+1 moved left to 16 16
+0 blocked 26 26
+1 moved up to 16 15
+0 blocked 19 5
+1 moved left to 15 15
+0 blocked 30 29
+1 moved up to 15 14
+0 blocked 4 9
+1 moved up to 15 13
+0 blocked 28 8
+1 moved left to 14 13
+0 blocked 18 19
+1 moved left to 13 13
+0 blocked 1 26
+1 moved down to 13 14
+0 blocked 38 31
+1 moved down to 13 15
+0 blocked 13 16
+1 moved up to 13 14
+0 blocked 8 9
+1 moved left to 12 14
+0 blocked 35 1
+1 moved left to 11 14
+0 blocked 31 24
+1 moved down to 11 15
+0 blocked 10 16
+1 moved up to 11 14
+0 blocked 8 14
+1 moved left to 10 14
+0 blocked 30 28
+1 moved left to 9 14
+0 blocked 27 3
+1 moved up to 9 13
+0 blocked 33 34
+1 moved left to 8 13
+0 blocked 4 3
+1 moved left to 7 13
+0 blocked 35 2
+1 moved down to 7 14
+0 moved left to 19 1
+1 moved left to 6 14
+0 moved left to 18 1
+1 moved down to 6 15
+0 moved left to 17 1
+1 moved left to 5 15
+0 moved left to 16 1
+1 moved down to 5 16
+0 moved left to 15 1
+1 moved left to 4 16
+0 blocked 4 17
+1 moved right to 5 16
+0 blocked 5 17
+1 moved right to 6 16
+0 blocked 6 18
+1 moved left to 5 16
+0 blocked 2 15
+1 moved right to 6 16
+0 blocked 7 18
+1 moved down to 6 17
+0 blocked 8 19
+1 moved up to 6 16
+0 blocked 0 24
+1 moved up to 6 15
+0 blocked 0 28
+1 moved down to 6 16
+0 blocked 10 18
+1 moved left to 5 16
+0 blocked 1 13
+1 moved up to 5 15
+0 blocked 0 15
+1 moved down to 5 16
+0 blocked 6 16
+1 moved up to 5 15
+0 blocked 6 15
+1 moved up to 5 14
+0 blocked 11 18
+1 moved right to 6 14
+0 moved left to 14 1
+1 moved right to 7 14
+0 moved left to 13 1
+1 moved down to 7 15
+0 moved left to 12 1
+1 moved right to 8 15
+0 blocked 8 16
+1 moved left to 7 15
+0 moved left to 11 1
+1 moved down to 7 16
+0 moved left to 10 1
+1 moved down to 7 17
+0 moved left to 9 1
+1 moved right to 8 17
+0 moved left to 8 1
+1 moved right to 9 17
+0 moved left to 7 1
+1 moved right to 10 17
+0 moved left to 6 1
+1 moved right to 11 17
+0 moved left to 5 1
+1 moved right to 12 17
+0 moved left to 4 1
+1 moved down to 12 18
+0 moved left to 3 1
+1 moved down to 12 19
+0 moved left to 2 1
+1 moved left to 11 19
+0 moved left to 1 1
+1 moved left to 10 19
+0 moved left to 0 1
+1 moved down to 10 20
+0 moved down to 0 2
+1 moved left to 9 20
+0 moved down to 0 3
+1 moved down to 9 21
+0 blocked 8 21
+1 moved up to 9 20
+0 moved right to 1 3
+1 moved left to 8 20
+0 moved down to 1 4
+1 moved left to 7 20
+0 moved right to 2 4
+1 moved down to 7 21
+0 moved down to 2 5
+1 moved left to 6 21
+0 moved right to 3 5
+1 moved down to 6 22
+0 moved right to 4 5
+1 moved down to 6 23
+0 moved right to 5 5
+1 moved down to 6 24
+0 blocked 5 24
+1 moved up to 6 23
+0 blocked 4 23
+1 moved left to 5 23
+0 blocked 5 22
+1 moved right to 6 23
+0 blocked 6 21
+1 moved up to 6 22
+0 blocked 2 26
+1 moved right to 7 22
+0 blocked 5 20
+1 moved up to 7 21
+0 blocked 4 19
+1 moved up to 7 20
+0 moved right to 6 5
+1 moved left to 6 20
+0 moved down to 6 6
+1 blocked 7 6
+0 moved up to 6 5
+1 blocked 7 5
+0 moved down to 6 6
+1 blocked 5 6
+0 moved up to 6 5
+1 blocked 6 4
+0 moved left to 5 5
+1 blocked 4 5
+0 moved up to 5 4
+1 blocked 3 5
+0 moved left to 4 4
+1 blocked 2 4
+0 moved left to 3 4
+1 blocked 1 4
+0 moved up to 3 3
+1 blocked 7 10
+0 moved left to 2 3
+1 blocked 9 7
+0 moved left to 1 3
+1 blocked 9 6
+0 moved left to 0 3
+1 blocked 9 5
+0 moved down to 0 4
+1 moved up to 6 19
+0 moved down to 0 5
+1 moved left to 5 19
+0 moved down to 0 6
+1 moved up to 5 18
+0 moved down to 0 7
+1 blocked 2 8
+0 moved right to 1 7
+1 moved left to 4 18
+0 moved down to 1 8
+1 blocked 1 9
+0 moved up to 1 7
+1 moved left to 3 18
+0 moved right to 2 7
+1 moved down to 3 19
+0 moved up to 2 6
+1 moved left to 2 19
+0 blocked 1 28
+1 moved right to 3 19
+0 blocked 3 20
+1 moved left to 2 19
+0 moved right to 3 6
+1 moved down to 2 20
+0 moved right to 4 6
+1 moved down to 2 21
+0 moved down to 4 7
+1 moved right to 3 21
+0 blocked 3 26
+1 moved down to 3 22
+0 blocked 2 29
+1 moved down to 3 23
+0 moved right to 5 7
+1 moved down to 3 24
+0 blocked 2 24
+1 moved up to 3 23
+0 blocked 2 23
+1 moved up to 3 22
+0 blocked 1 22
+1 moved up to 3 21
+0 blocked 1 21
+1 moved left to 2 21
+0 blocked 1 20
+1 moved up to 2 20
+0 blocked 1 19
+1 moved up to 2 19
+0 blocked 2 18
+1 moved right to 3 19
+0 blocked 1 17
+1 moved up to 3 18
+0 moved down to 5 8
+1 moved up to 3 17
+0 moved right to 6 8
+1 moved left to 2 17
+0 moved right to 7 8
+1 moved up to 2 16
+0 moved right to 8 8
+1 moved left to 1 16
+0 moved up to 8 7
+1 moved left to 0 16
+0 moved up to 8 6
+1 moved down to 0 17
+0 moved up to 8 5
+1 moved down to 0 18
+0 moved up to 8 4
+1 moved down to 0 19
+0 moved right to 9 4
+1 moved down to 0 20
+0 moved right to 10 4
+1 moved down to 0 21
+0 moved right to 11 4
+1 moved down to 0 22
+0 moved right to 12 4
+1 moved down to 0 23
+0 moved down to 12 5
+1 moved right to 1 23
+0 moved right to 13 5
+1 moved down to 1 24
+0 moved down to 13 6
+1 moved down to 1 25
+0 moved right to 14 6
+1 moved left to 0 25
+0 moved down to 14 7
+1 moved down to 0 26
+0 moved right to 15 7
+1 moved down to 0 27
+0 moved right to 16 7
+1 moved right to 1 27
+0 moved down to 16 8
+1 moved right to 2 27
+0 moved right to 17 8
+1 moved right to 3 27
+0 moved right to 18 8
+1 moved down to 3 28
+0 moved right to 19 8
+1 moved down to 3 29
+0 moved down to 19 9
+1 moved down to 3 30
+0 moved right to 20 9
+1 moved down to 3 31
+0 moved down to 20 10
+1 moved down to 3 32
+0 moved right to 21 10
+1 blocked 21 11
+0 moved up to 21 9
+1 blocked 22 9
+0 moved left to 20 9
+1 blocked 20 10
+0 moved left to 19 9
+1 blocked 19 10
+0 moved right to 20 9
+1 blocked 21 8
+0 moved left to 19 9
+1 blocked 18 9
+0 moved right to 20 9
+1 blocked 20 7
+0 moved left to 19 9
+1 moved down to 3 33
+0 blocked 1 33
+1 moved left to 2 33
+0 blocked 2 32
+1 moved right to 3 33
+0 blocked 3 31
+1 moved up to 3 32
+0 moved up to 19 8
+1 moved right to 4 32
+0 moved left to 18 8
+1 blocked 17 8
+0 moved right to 19 8
+1 blocked 19 6
+0 moved up to 19 7
+1 blocked 16 7
+0 moved left to 18 7
+1 blocked 18 4
+0 moved left to 17 7
+1 blocked 17 6
+0 moved right to 18 7
+1 moved up to 4 31
+0 moved up to 18 6
+1 moved up to 4 30
+0 moved up to 18 5
+1 moved left to 3 30
+0 moved left to 17 5
+1 moved left to 2 30
+0 moved up to 17 4
+1 blocked 17 3
+0 moved left to 16 4
+1 blocked 15 6
+0 moved left to 15 4
+1 blocked 14 5
+0 moved left to 14 4
+1 blocked 13 4
+0 moved up to 14 3
+1 blocked 12 4
+0 moved left to 13 3
+1 blocked 11 5
+0 moved left to 12 3
+1 moved down to 2 31
+0 blocked 1 31
+1 moved up to 2 30
+0 moved left to 11 3
+1 moved left to 1 30
+0 moved down to 11 4
+1 moved left to 0 30
+0 moved left to 10 4
+1 moved down to 0 31
+0 moved down to 10 5
+1 moved down to 0 32
+0 moved down to 10 6
+1 moved down to 0 33
+0 moved right to 11 6
+1 moved down to 0 34
+0 moved down to 11 7
+1 moved down to 0 35
+0 moved down to 11 8
+1 moved down to 0 36
+0 moved down to 11 9
+1 moved down to 0 37
+0 moved right to 12 9
+1 moved right to 1 37
+0 moved right to 13 9
+1 moved right to 2 37
+0 moved down to 13 10
+1 blocked 14 10
+0 moved up to 13 9
+1 blocked 14 9
+0 moved up to 13 8
+1 blocked 14 8
+0 moved up to 13 7
+1 moved right to 3 37
+0 moved right to 14 7
+1 moved right to 4 37
+0 moved right to 15 7
+1 moved right to 5 37
+0 moved down to 15 8
+1 moved right to 6 37
+0 moved down to 15 9
+1 moved right to 7 37
+0 moved down to 15 10
+1 moved right to 8 37
+0 moved down to 15 11
+1 blocked 16 11
+0 moved up to 15 10
+1 blocked 16 10
+0 moved up to 15 9
+1 moved down to 8 38
+0 blocked 13 38
+1 moved right to 9 38
+0 moved right to 16 9
+1 moved up to 9 37
+0 blocked 13 37
+1 moved up to 9 36
+0 blocked 12 36
+1 moved right to 10 36
+0 blocked 12 39
+1 moved up to 10 35
+0 blocked 10 34
+1 moved left to 9 35
+0 blocked 11 33
+1 moved up to 9 34
+0 blocked 12 32
+1 moved up to 9 33
+0 blocked 13 31
+1 moved right to 10 33
+0 moved right to 17 9
+1 moved up to 10 32
+0 moved down to 17 10
+1 moved right to 11 32
+0 moved right to 18 10
+1 blocked 18 11
+0 moved left to 17 10
+1 moved up to 11 31
+0 moved down to 17 11
+1 moved right to 12 31
+0 moved down to 17 12
+1 moved up to 12 30
+0 moved right to 18 12
+1 moved right to 13 30
+0 moved right to 19 12
+1 moved right to 14 30
+0 moved right to 20 12
+1 moved right to 15 30
+0 blocked 15 32
+1 moved down to 15 31
+0 blocked 14 33
+1 moved left to 14 31
+0 blocked 13 34
+1 moved down to 14 32
+0 moved down to 20 13
+1 moved left to 13 32
+0 moved down to 20 14
+1 moved down to 13 33
+0 moved right to 21 14
+1 moved left to 12 33
+0 moved down to 21 15
+1 blocked 22 16
+0 moved right to 22 15
+1 blocked 22 14
+0 moved left to 21 15
+1 blocked 25 15
+0 moved up to 21 14
+1 blocked 21 13
+0 moved left to 20 14
+1 blocked 20 13
+0 moved left to 19 14
+1 blocked 19 13
+0 moved left to 18 14
+1 blocked 23 12
+0 moved up to 18 13
+1 blocked 24 11
+0 moved up to 18 12
+1 blocked 24 10
+0 moved right to 19 12
+1 blocked 24 9
+0 moved right to 20 12
+1 blocked 24 8
+0 moved right to 21 12
+1 blocked 23 7
+0 moved right to 22 12
+1 blocked 22 6
+0 moved up to 22 11
+1 blocked 21 5
+0 moved right to 23 11
+1 blocked 21 4
+0 moved up to 23 10
+1 blocked 22 3
+0 moved up to 23 9
+1 blocked 26 32
+0 moved up to 23 8
+1 moved down to 12 34
+0 moved left to 22 8
+1 moved down to 12 35
+0 moved up to 22 7
+1 moved right to 13 35
+0 moved left to 21 7
+1 moved right to 14 35
+0 moved up to 21 6
+1 moved right to 15 35
+0 moved left to 20 6
+1 moved down to 15 36
+0 moved up to 20 5
+1 moved right to 16 36
+0 moved up to 20 4
+1 moved down to 16 37
+0 moved up to 20 3
+1 moved right to 17 37
+0 moved right to 21 3
+1 moved down to 17 38
+0 moved up to 21 2
+1 moved right to 18 38
+0 moved right to 22 2
+1 moved right to 19 38
+0 moved right to 23 2
+1 moved right to 20 38
+0 moved right to 24 2
+1 blocked 25 2
+0 moved left to 23 2
+1 blocked 23 3
+0 moved right to 24 2
+1 moved right to 21 38
+0 moved up to 24 1
+1 moved up to 21 37
+0 moved right to 25 1
+1 moved up to 21 36
+0 moved right to 26 1
+1 moved right to 22 36
+0 moved right to 27 1
+1 moved up to 22 35
+0 moved down to 27 2
+1 moved up to 22 34
+0 moved right to 28 2
+1 moved up to 22 33
+0 moved right to 29 2
+1 blocked 30 5
+0 moved right to 30 2
+1 blocked 31 27
+0 moved down to 30 3
+1 blocked 32 30
+0 moved down to 30 4
+1 moved up to 22 32
+0 moved right to 31 4
+1 moved up to 22 31
+0 moved right to 32 4
+1 moved up to 22 30
+0 moved right to 33 4
+1 blocked 33 5
+0 moved right to 34 4
+1 blocked 36 17
+0 moved down to 34 5
+1 blocked 33 16
+0 moved right to 35 5
+1 blocked 37 16
+0 moved right to 36 5
+1 blocked 38 15
+0 moved down to 36 6
+1 blocked 36 31
+0 moved left to 35 6
+1 blocked 32 15
+0 moved down to 35 7
+1 moved right to 23 30
+0 moved down to 35 8
+1 moved up to 23 29
+0 moved right to 36 8
+1 blocked 35 30
+0 moved right to 37 8
+1 blocked 34 29
+0 moved right to 38 8
+1 blocked 33 27
+0 moved left to 37 8
+1 blocked 28 29
+0 moved down to 37 9
+1 moved up to 23 28
+0 moved down to 37 10
+1 moved up to 23 27
+0 moved left to 36 10
+1 moved up to 23 26
+0 moved left to 35 10
+1 moved up to 23 25
+0 moved left to 34 10
+1 moved up to 23 24
+0 moved left to 33 10
+1 moved up to 23 23
+0 moved left to 32 10
+1 moved right to 24 23
+0 moved left to 31 10
+1 moved up to 24 22
+0 blocked 25 21
+1 moved right to 25 22
+0 blocked 26 23
+1 moved down to 25 23
+0 blocked 26 24
+1 moved down to 25 24
+0 blocked 27 25
+1 moved left to 24 24
+0 blocked 23 21
+1 moved left to 23 24
+0 blocked 22 20
+1 moved right to 24 24
+0 blocked 26 27
+1 moved right to 25 24
+0 blocked 25 28
+1 moved down to 25 25
+0 blocked 24 29
+1 moved down to 25 26
+0 blocked 23 29
+1 moved down to 25 27
+0 blocked 21 27
+1 moved left to 24 27
+0 blocked 20 26
+1 moved left to 23 27
+0 blocked 21 25
+1 moved up to 23 26
+0 blocked 23 23
+1 moved up to 23 25
+0 blocked 24 23
+1 moved up to 23 24
+0 blocked 24 30
+1 moved right to 24 24
+0 blocked 25 31
+1 blocked 29 36
+0 blocked 28 34
+1 blocked 30 35
+0 blocked 29 34
+1 blocked 31 37
+0 blocked 19 25
+1 moved right to 25 24
+0 blocked 31 36
+1 blocked 32 39
+0 blocked 32 37
+1 blocked 33 39
+0 blocked 33 36
+1 blocked 35 38
+0 blocked 35 37
+1 moved up to 25 23
+0 blocked 29 38
+1 moved up to 25 22
+0 blocked 18 26
+1 moved left to 24 22
+0 blocked 17 26
+1 moved left to 23 22
+0 moved left to 30 10
+1 moved left to 22 22
+0 moved down to 30 11
+1 moved down to 22 23
+0 blocked 18 24
+1 moved left to 21 23
+0 blocked 20 22
+1 moved up to 21 22
+0 moved left to 29 11
+1 blocked 28 12
+0 moved down to 29 12
+1 blocked 30 12
+0 moved up to 29 11
+1 blocked 27 11
+0 moved right to 30 11
+1 blocked 31 11
+0 moved left to 29 11
+1 blocked 26 10
+0 moved right to 30 11
+1 blocked 30 10
+0 moved left to 29 11
+1 moved up to 21 21
+0 moved up to 29 10
+1 moved left to 20 21
+0 moved left to 28 10
+1 blocked 25 9
+0 moved right to 29 10
+1 blocked 29 9
+0 moved left to 28 10
+1 blocked 28 7
+0 moved up to 28 9
+1 blocked 27 6
+0 moved left to 27 9
+1 blocked 26 5
+0 moved left to 26 9
+1 blocked 24 5
+0 moved up to 26 8
+1 blocked 28 4
+0 moved left to 25 8
+1 blocked 25 7
+0 moved right to 26 8
+1 blocked 30 4
+0 moved up to 26 7
+1 blocked 31 3
+0 moved up to 26 6
+1 blocked 32 4
+0 moved left to 25 6
+1 blocked 34 4
+0 moved left to 24 6
+1 blocked 35 4
+0 moved left to 23 6
+1 blocked 36 4
+0 moved up to 23 5
+1 blocked 37 3
+0 moved up to 23 4
+1 blocked 38 2
+0 moved right to 24 4
+1 moved left to 19 21
+0 moved right to 25 4
+1 moved down to 19 22
+0 moved right to 26 4
+1 moved left to 18 22
+0 moved right to 27 4
+1 moved down to 18 23
+0 moved down to 27 5
+1 moved left to 17 23
+0 moved right to 28 5
+1 moved down to 17 24
+0 moved right to 29 5
+1 moved down to 17 25
+0 moved up to 29 4
+1 moved left to 16 25
+0 moved up to 29 3
+1 moved down to 16 26
+0 moved up to 29 2
+1 moved down to 16 27
+0 moved right to 30 2
+1 moved right to 17 27
+0 moved up to 30 1
+1 moved right to 18 27
+0 moved right to 31 1
+1 moved right to 19 27
+0 moved right to 32 1
+1 moved down to 19 28
+0 moved right to 33 1
+1 moved right to 20 28
+0 moved down to 33 2
+1 moved right to 21 28
+0 blocked 21 29
+1 moved left to 20 28
+0 blocked 20 29
+1 moved left to 19 28
+0 blocked 19 30
+1 moved down to 19 29
+0 moved down to 33 3
+1 moved left to 18 29
+0 moved right to 34 3
+1 moved down to 18 30
+0 moved right to 35 3
+1 moved down to 18 31
+0 moved right to 36 3
+1 moved down to 18 32
+0 moved up to 36 2
+1 moved right to 19 32
+0 moved up to 36 1
+1 moved down to 19 33
+0 moved right to 37 1
+1 moved down to 19 34
+0 blocked 20 34
+1 moved up to 19 33
+0 blocked 21 33
+1 moved up to 19 32
+0 blocked 22 32
+1 moved up to 19 31
+0 blocked 20 31
+1 moved down to 19 32
+0 blocked 22 31
+1 moved right to 20 32
+0 moved right to 38 1
+1 moved right to 21 32
+0 moved right to 39 1
+1 moved up to 21 31
+0 moved down to 39 2
+1 moved up to 21 30
+0 moved down to 39 3
+1 moved right to 22 30
+0 moved left to 38 3
+1 blocked 38 4
+0 moved right to 39 3
+1 moved right to 23 30
+0 moved down to 39 4
+1 moved down to 23 31
+0 moved down to 39 5
+1 moved right to 24 31
+0 blocked 24 32
+1 moved left to 23 31
+0 moved left to 38 5
+1 moved down to 23 32
+0 moved down to 38 6
+1 moved down to 23 33
+0 moved down to 38 7
+1 moved right to 24 33
+0 moved left to 37 7
+1 moved right to 25 33
+0 moved left to 36 7
+1 moved down to 25 34
+0 moved left to 35 7
+1 moved right to 26 34
+0 moved down to 35 8
+1 moved right to 27 34
+0 blocked 27 37
+1 moved down to 27 35
+0 blocked 26 36
+1 moved left to 26 35
+0 blocked 25 35
+1 moved up to 26 34
+0 blocked 23 34
+1 moved left to 25 34
+0 blocked 22 35
+1 moved left to 24 34
+0 blocked 21 36
+1 moved up to 24 33
+0 moved down to 35 9
+1 moved left to 23 33
+0 moved down to 35 10
+1 moved left to 22 33
+0 moved left to 34 10
+1 moved down to 22 34
+0 moved down to 34 11
+1 moved left to 21 34
+0 moved down to 34 12
+1 moved down to 21 35
+0 moved left to 33 12
+1 moved left to 20 35
+0 moved down to 33 13
+1 moved down to 20 36
+0 moved left to 32 13
+1 moved down to 20 37
+0 moved left to 31 13
+1 moved right to 21 37
+0 moved down to 31 14
+1 moved down to 21 38
+0 blocked 24 38
+1 moved up to 21 37
+0 blocked 25 37
+1 moved right to 22 37
+0 moved left to 30 14
+1 blocked 30 15
+0 moved right to 31 14
+1 blocked 31 15
+0 blocked 39 9
+1 moved down to 22 38
+0 blocked 38 9
+1 moved down to 22 39
+0 blocked 37 10
+1 moved right to 23 39
+0 blocked 36 11
+1 moved right to 24 39
+0 blocked 35 12
+1 moved right to 25 39
+0 blocked 34 13
+1 blocked 32 14
+0 blocked 33 12
+1 moved up to 25 38
+0 moved up to 31 13
+1 moved right to 26 38
+0 moved right to 32 13
+1 moved right to 27 38
+0 moved right to 33 13
+1 moved right to 28 38
+0 moved down to 33 14
+1 moved down to 28 39
+0 moved right to 34 14
+1 moved right to 29 39
+0 moved down to 34 15
+1 moved right to 30 39
+0 moved right to 35 15
+1 moved up to 30 38
+0 moved right to 36 15
+1 moved right to 31 38
+0 blocked 35 15
+1 moved right to 32 38
+0 moved right to 37 15
+1 blocked 37 14
+0 moved left to 36 15
+1 moved right to 33 38
+0 moved up to 36 14
+1 moved right to 34 38
+0 moved up to 36 13
+1 moved down to 34 39
+0 moved right to 37 13
+1 moved right to 35 39
+0 moved right to 38 13
+1 moved right to 36 39
+0 moved down to 38 14
+1 moved up to 36 38
+0 moved right to 39 14
+1 blocked 36 39
+0 moved down to 39 15
+1 blocked 37 38
+0 moved down to 39 16
+1 blocked 38 37
+0 moved down to 39 17
+1 blocked 39 39
+0 moved down to 39 18
+1 moved up to 36 37
+0 moved down to 39 19
+1 moved up to 36 36
+0 moved down to 39 20
+1 moved left to 35 36
+0 moved down to 39 21
+1 blocked 39 22
+0 moved up to 39 20
+1 blocked 37 20
+0 moved up to 39 19
+1 blocked 37 19
+0 moved up to 39 18
+1 blocked 38 18
+0 moved up to 39 17
+1 moved up to 35 35
+0 moved left to 38 17
+1 moved left to 34 35
+0 moved left to 37 17
+1 moved left to 33 35
+0 moved down to 37 18
+1 moved left to 32 35
+0 moved left to 36 18
+1 moved left to 31 35
+0 moved down to 36 19
+1 moved up to 31 34
+0 moved down to 36 20
+1 moved up to 31 33
+0 moved left to 35 20
+1 moved left to 30 33
+0 moved down to 35 21
+1 moved left to 29 33
+0 moved down to 35 22
+1 moved left to 28 33
+0 moved down to 35 23
+1 moved up to 28 32
+0 moved left to 34 23
+1 moved left to 27 32
+0 moved left to 33 23
+1 moved up to 27 31
+0 moved left to 32 23
+1 moved up to 27 30
+0 moved left to 31 23
+1 blocked 30 23
+0 moved up to 31 22
+1 blocked 29 22
+0 moved right to 32 22
+1 blocked 31 25
+0 moved left to 31 22
+1 blocked 28 21
+0 moved up to 31 21
+1 blocked 27 20
+0 moved left to 30 21
+1 moved up to 27 29
+0 moved left to 29 21
+1 blocked 27 30
+0 moved up to 29 20
+1 blocked 28 19
+0 moved up to 29 19
+1 blocked 30 19
+0 moved down to 29 20
+1 blocked 31 20
+0 moved right to 30 20
+1 blocked 32 21
+0 moved down to 30 21
+1 blocked 33 22
+0 moved right to 31 21
+1 blocked 34 23
+0 moved down to 31 22
+1 blocked 35 24
+0 moved right to 32 22
+1 blocked 36 25
+0 moved down to 32 23
+1 blocked 38 27
+0 moved down to 32 24
+1 blocked 37 28
+0 moved down to 32 25
+1 blocked 33 25
+0 moved up to 32 24
+1 blocked 37 29
+0 moved right to 33 24
+1 moved up to 27 28
+0 moved right to 34 24
+1 moved up to 27 27
+0 moved down to 34 25
+1 moved up to 27 26
+0 moved right to 35 25
+1 blocked 35 26
+0 moved left to 34 25
+1 moved right to 28 26
+0 moved down to 34 26
+1 moved up to 28 25
+0 moved down to 34 27
+1 blocked 28 26
+0 moved right to 35 27
+1 blocked 29 25
+0 moved right to 36 27
+1 blocked 36 28
+0 moved left to 35 27
+1 moved up to 28 24
+0 moved down to 35 28
+1 moved left to 27 24
+0 moved down to 35 29
+1 moved up to 27 23
+0 moved right to 36 29
+1 moved up to 27 22
+0 moved down to 36 30
+1 moved up to 27 21
+0 moved right to 37 30
+1 moved left to 26 21
+0 moved right to 38 30
+1 moved up to 26 20
+0 moved up to 38 29
+1 moved up to 26 19
+0 moved up to 38 28
+1 moved right to 27 19
+0 moved right to 39 28
+1 blocked 26 19
+0 moved up to 39 27
+1 blocked 25 18
+0 moved up to 39 26
+1 blocked 26 17
+0 moved left to 38 26
+1 blocked 38 25
+0 moved right to 39 26
+1 moved up to 27 18
+0 moved up to 39 25
+1 moved right to 28 18
+0 blocked 28 17
+1 moved left to 27 18
+0 moved up to 39 24
+1 moved up to 27 17
+0 moved up to 39 23
+1 blocked 38 23
+0 moved down to 39 24
+1 moved up to 27 16
+0 moved left to 38 24
+1 moved right to 28 16
+0 moved left to 37 24
+1 moved right to 29 16
+0 moved left to 36 24
+1 blocked 28 16
+0 moved up to 36 23
+1 moved right to 30 16
+0 moved left to 35 23
+1 blocked 35 22
+0 moved right to 36 23
+1 blocked 36 22
+0 moved right to 37 23
+1 moved right to 31 16
+0 moved up to 37 22
+1 moved right to 32 16
+0 moved up to 37 21
+1 moved down to 32 17
+0 moved left to 36 21
+1 moved down to 32 18
+0 moved left to 35 21
+1 moved right to 33 18
+0 moved left to 34 21
+1 moved down to 33 19
+0 moved left to 33 21
+1 blocked 33 20
+0 moved right to 34 21
+1 blocked 34 20
+0 moved right to 35 21
+1 blocked 35 20
+0 moved right to 36 21
+1 moved right to 34 19
+0 moved up to 36 20
+1 moved right to 35 19
+0 moved up to 36 19
+1 moved right to 36 19
+0 moved left to 35 19
+1 moved up to 36 18
+0 moved left to 34 19
+1 moved right to 37 18
+0 moved up to 34 18
+1 blocked 33 18
+0 moved down to 34 19
+1 moved up to 37 17
+0 moved left to 33 19
+1 moved right to 38 17
+0 moved left to 32 19
+1 moved up to 38 16
+0 moved up to 32 18
+1 moved right to 39 16
+0 moved left to 31 18
+1 moved up to 39 15
+0 moved up to 31 17
+1 moved up to 39 14
+0 moved left to 30 17
+1 moved left to 38 14
+0 blocked 38 13
+1 moved right to 39 14
+0 moved left to 29 17
+1 moved up to 39 13
+0 moved up to 29 16
+1 moved up to 39 12
+0 moved up to 29 15
+1 moved left to 38 12
+0 moved left to 28 15
+1 moved left to 37 12
+0 moved left to 27 15
+1 moved left to 36 12
+0 moved down to 27 16
+1 moved down to 36 13
+0 moved left to 26 16
+1 moved down to 36 14
+0 moved left to 25 16
+1 moved down to 36 15
+0 moved down to 25 17
+1 moved down to 36 16
+0 moved left to 24 17
+1 moved left to 35 16
+0 moved down to 24 18
+1 moved left to 34 16
+0 moved down to 24 19
+1 moved up to 34 15
+0 moved right to 25 19
+1 moved left to 33 15
+0 moved down to 25 20
+1 moved up to 33 14
+0 moved right to 26 20
+1 moved up to 33 13
+0 moved down to 26 21
+1 moved left to 32 13
+0 moved right to 27 21
+1 moved up to 32 12
+0 moved down to 27 22
+1 moved up to 32 11
+0 moved right to 28 22
+1 blocked 28 23
+0 moved left to 27 22
+1 moved up to 32 10
+0 moved down to 27 23
+1 moved up to 32 9
+0 moved down to 27 24
+1 moved up to 32 8
+0 moved right to 28 24
+1 moved up to 32 7
+0 moved right to 29 24
+1 moved up to 32 6
+0 moved right to 30 24
+1 moved right to 33 6
+0 moved down to 30 25
+1 moved right to 34 6
+0 moved down to 30 26
+1 moved up to 34 5
+0 moved down to 30 27
+1 moved right to 35 5
+0 moved left to 29 27
+1 moved right to 36 5
+0 moved left to 28 27
+1 moved right to 37 5
+0 moved down to 28 28
+1 moved right to 38 5
+0 moved left to 27 28
+1 moved right to 39 5
+0 moved down to 27 29
+1 moved up to 39 4
+0 moved left to 26 29
+1 moved up to 39 3
+0 moved down to 26 30
+1 moved up to 39 2
+0 moved down to 26 31
+1 moved up to 39 1
+0 blocked 4 20
+1 moved up to 39 0
+1 wins
