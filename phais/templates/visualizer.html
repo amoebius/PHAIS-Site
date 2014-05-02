@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Visualizer!
+{% endblock title %}
+
+
+{% block content %}
+  
+  <div class="jumbotron">
+    <h2>Game Visualization</h2>
+  </div>
+
+  <div class="container-fluid" align="center" style="padding: 20px; margin-bottom: 30px;">
+    <canvas id="visualization"></canvas>
+  </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+  
+  {{ super() }}
+
+  <script src="/static/js/blockade/visualizer.js"></script>
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Six+Caps::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'false';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
+  <script>
+    visualizer.run($('#visualization')[0], '{{ log }}', 700, 300);
+  </script>
+
+{% endblock scripts %}
