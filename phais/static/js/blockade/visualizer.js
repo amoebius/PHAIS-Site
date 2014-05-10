@@ -14,6 +14,7 @@ visualizer = {
 	board: null,
 	tokens: null,
 	timerId: null,
+	textStyle: null,
 
 	run: function(canvas, log, size, frequency) {
 		this.tokens = log.split(' ').reverse();
@@ -78,6 +79,7 @@ visualizer = {
 		this.canvas.width = this.size;
 		this.canvas.height = this.size;
 		this.spacing = this.size * 1.0 / this.boardSize + this.epsilon;
+		this.textStyle = (this.size / 5).toString() + "px bold sans-serif 'Six Caps'";
 	},
 
 	draw: function() {
@@ -115,17 +117,17 @@ visualizer = {
 		for(var player = 0; player < 2; ++player) {
 			this.drawPlayer(context, this.loc[player], this.colors[player]);
 		}
-	},
+	},one 
 
 	drawText: function(context, winner) {
-		context.font = "140px bold sans-serif 'Six Caps'";
+		context.font = this.textStyle;
 		context.strokeStyle = "#555599";
 		const translucency = 0.82;
 		const winTranslucency = 0.1;
-		const winBrightness = 0.75;
+		const winBrightness = 0.8;
 		const xFactor = 0.1;
-		const yFactor = 0.17;
-		const yComp = 0.013;
+		const yFactor = 0.15;
+		const yComp = 0.04;
 
 		if(winner == 1 || winner == 0) {
 			context.strokeStyle = "#001188";
@@ -199,7 +201,7 @@ visualizer = {
 			context.save();
 			context.beginPath();
 			context.rect(location[0] * this.spacing + this.spacing * (1 - scale) / 2, location[1] * this.spacing + this.spacing * (1 - scale) / 2, this.spacing * scale, this.spacing * scale);
-			context.fillStyle = this.colorToHex(this.interpolateColor(this.colors[player], this.backgroundColor, 0.93));
+			context.fillStyle = this.colorToHex(this.backgroundColor);w
 			context.fill();
 			context.clip();
 			this.drawText(context);
@@ -232,7 +234,7 @@ visualizer = {
 			this.next(); // to
 			var x = this.nextInt();
 			var y = this.nextInt();
-			this.drawBlock(context, this.loc[player], player)
+			this.drawBlock(context, this.loc[player])
 			this.loc[player] = [x, y];
 			this.drawPlayer(context, this.loc[player], this.colors[player]);
 			setTimeout($.proxy(this.move, this), this.timeout);
