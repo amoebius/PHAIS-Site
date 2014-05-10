@@ -21,8 +21,4 @@ sudo pip install flask-openid &&
 sudo apt-get -y install libmysqlclient-dev &&
 sudo pip install MySQL-python &&
 
-# Install mbox
-wget http://pdos.csail.mit.edu/mbox/mbox-latest-amd64.deb -O /tmp/mbox-latest-amd64.deb &&
-sudo dpkg -i /tmp/mbox-latest-amd64.deb &&
-
 echo "Finished successfully."
