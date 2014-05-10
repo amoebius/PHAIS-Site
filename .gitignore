@@ -1,3 +1,5 @@
 instance/config.py
+*.pyc
 .vagrant
 Vagrantfile
+
