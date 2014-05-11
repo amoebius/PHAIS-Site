@@ -23,7 +23,11 @@
   {{ super() }}
 
   <script src="/static/js/blockade/visualizer.js"></script>
+  
   <script type="text/javascript">
+    // TODO: HOST FONT MYSELF IN /static/
+    // TODO: Host jquery myself?  Just need to wget it from google
+    // TODO: Wait until font has loaded before progressing to game visualisation.
   WebFontConfig = {
     google: { families: [ 'Six+Caps::latin' ] }
   };
@@ -37,7 +41,7 @@
     s.parentNode.insertBefore(wf, s);
   })(); </script>
   <script>
-    visualizer.run($('#visualization')[0], '{{ log }}', 700, 40);
+    visualizer.run($('#visualization')[0], '{{ log }}', 700, 100);
   </script>
 
 {% endblock scripts %}

@@ -7,11 +7,16 @@ visualizer = {
 	epsilon: 0.0000001,
 	names: [null, null],
 	colors: [null, null],
+	moves: [null, null],
 	defaultColors: [[0xFF, 0x44, 0x99], [0x44, 0xEE, 0x99]],
 	backgroundColor: [0x20, 0x30, 0x40],
+	backgroundImage: null,
+	trailColor: [0xAA, 0x00, 0xAA],
+	trailAlpha: 0.2,
 	loc: [null, null],
 	canvas: null,
 	board: null,
+	trail: null,
 	tokens: null,
 	timerId: null,
 	textStyle: null,
@@ -25,17 +30,18 @@ visualizer = {
 		this.next() // size
 		this.boardSize = this.nextInt();
 		
-		for(var player = 0; player < 2; ++player) {
+		for (var player = 0; player < 2; ++player) {
 			// {player} starts at
-			for(var i = 0; i < 3; ++i) this.next();
+			for (var i = 0; i < 3; ++i) this.next();
 			var x = this.nextInt();
 			var y = this.nextInt();
 			this.loc[player] = [x, y];
+			this.moves[player] = 0;
 		}
 
-		for(var player = 0; player < 2; ++player) {
-			// {player} RGB
-			for(var i = 0; i < 2; ++i) this.next();
+		for (var player = 0; player < 2; ++player) {
+			// {player} color R G B
+			for (var i = 0; i < 2; ++i) this.next();
 
 			const weight = 0.25;
 			var r = this.nextInt();
@@ -45,24 +51,47 @@ visualizer = {
 		}
 
 		this.board = []
-		for(var y = 0; y < this.boardSize; ++y) {
+		for (var y = 0; y < this.boardSize; ++y) {
 			this.board.push([]);
-			for(var x = 0; x < this.boardSize; ++x) {
+			for (var x = 0; x < this.boardSize; ++x) {
 				this.board[y].push(false);
 			}
+		}
+
+		this.trail = []
+		for (var y = 0; y < this.boardSize; ++y) {
+			this.trail.push([]);
+			for (var x = 0; x < this.boardSize; ++x) {
+				this.trail[y].push([]);
+			}
+		}
+		for (var player = 0; player < 2; ++player) {
+			this.trail[this.loc[player][1]][this.loc[player][0]].push([player, this.getTrailBlend(0)]);
 		}
 
 		this.canvas = canvas;
 		this.resize(size);
 
+
 		this.timeout = 1000.0 / frequency;
 		
+
+		// TODO:  THERE HAS TO BE A BETTER WAY >:C
 		setTimeout($.proxy(function() {
+			
+			this.backgroundImage = document.createElement("canvas");
+			this.backgroundImage.width = this.size;
+			this.backgroundImage.height = this.size;
+			var bg_context = this.backgroundImage.getContext("2d");
+			bg_context.fillStyle = this.colorToStyle(this.backgroundColor);
+			bg_context.fillRect(0, 0, this.size, this.size);
+			this.drawText(bg_context);
 
 			this.draw();
 			setTimeout($.proxy(this.move, this), this.timeout);
 
 		}, this), 700);
+
 
 	},
 
@@ -84,62 +113,36 @@ visualizer = {
 
 	draw: function() {
 		var context = this.getContext();
-		
-		context.fillStyle = this.colorToHex(this.backgroundColor);
-		context.fillRect(0, 0, this.size, this.size);
-
-		this.drawText(context);
-
-		context.strokeStyle = "#001020";
-
-		for(var y = this.spacing; y < this.size; y += this.spacing) {
-			context.beginPath();
-			context.moveTo(0, y);
-			context.lineTo(this.size, y);
-			context.stroke();
-		}
-
-		for(var x = this.spacing; x < this.size; x += this.spacing) {
-			context.beginPath();
-			context.moveTo(x, 0);
-			context.lineTo(x, this.size);
-			context.stroke();
-		}
-
 		for(var y = 0; y < this.boardSize; ++y) {
 			for(var x = 0; x < this.boardSize; ++x) {
-				if(this.board[y][x]) {
-					this.drawBlock(context, [x, y]);
-				}
+				this.drawBlock(context, [x, y]);
 			}
 		}
-
-		for(var player = 0; player < 2; ++player) {
-			this.drawPlayer(context, this.loc[player], this.colors[player]);
-		}
-	},one 
+	},
 
 	drawText: function(context, winner) {
 		context.font = this.textStyle;
 		context.strokeStyle = "#555599";
+		context.lineWidth = 1;
 		const translucency = 0.82;
 		const winTranslucency = 0.1;
-		const winBrightness = 0.8;
+		const winBrightness = 0.3;
 		const xFactor = 0.1;
 		const yFactor = 0.15;
 		const yComp = 0.04;
 
 		if(winner == 1 || winner == 0) {
-			context.strokeStyle = "#001188";
+			context.strokeStyle = "#110555";
+			context.lineWidth = 1.5;
 		}
 
 		if(winner != 1) {
 			context.textBaseline = "hanging";
 			context.textAlign = "left";
 			if(winner == 0) {
-				context.fillStyle = this.colorToHex(this.interpolateColor(this.interpolateColor(this.colors[0], this.backgroundColor, winTranslucency), [255, 255, 255], winBrightness));
+				context.fillStyle = this.colorToStyle(this.interpolateColor(this.interpolateColor(this.colors[0], this.backgroundColor, winTranslucency), [255, 255, 255], winBrightness));
 			} else {
-				context.fillStyle = this.colorToHex(this.interpolateColor(this.colors[0], this.backgroundColor, translucency));
+				context.fillStyle = this.colorToStyle(this.interpolateColor(this.colors[0], this.backgroundColor, translucency));
 			}
 			context.fillText(this.names[0], this.size * xFactor, this.size * yFactor);
 			context.strokeText(this.names[0], this.size * xFactor, this.size * yFactor);
@@ -156,9 +159,9 @@ visualizer = {
 		context.textBaseline = "alphabetic";
 		context.textAlign = "right";
 		if(winner == 1) {
-			context.fillStyle = this.colorToHex(this.interpolateColor(this.interpolateColor(this.colors[1], this.backgroundColor, winTranslucency), [255, 255, 255], winBrightness));
+			context.fillStyle = this.colorToStyle(this.interpolateColor(this.interpolateColor(this.colors[1], this.backgroundColor, winTranslucency), [255, 255, 255], winBrightness));
 		} else {
-			context.fillStyle = this.colorToHex(this.interpolateColor(this.colors[1], this.backgroundColor, translucency));
+			context.fillStyle = this.colorToStyle(this.interpolateColor(this.colors[1], this.backgroundColor, translucency));
 		}
 		context.fillText(this.names[1], this.size * (1 - xFactor), this.size * (1 - yFactor - yComp));
 		context.strokeText(this.names[1], this.size * (1 - xFactor), this.size * (1 - yFactor - yComp));
@@ -173,40 +176,76 @@ visualizer = {
 
 		context.textBaseline = "middle";
 		context.textAlign = "center";
-		context.fillStyle = this.colorToHex(this.interpolateColor(this.interpolateColor(this.colors[0], this.colors[1], 0.5), this.backgroundColor, translucency));
+		context.fillStyle = this.colorToStyle(this.interpolateColor(this.interpolateColor(this.colors[0], this.colors[1], 0.5), this.backgroundColor, translucency));
 		context.fillText("versus", this.size * 0.5, this.size * 0.5);
 		context.strokeText("versus", this.size * 0.5, this.size * 0.5);
 
 	},
 
 	drawPlayer: function(context, location, color) {
-		context.fillStyle = this.colorToHex(color);
-		context.strokeStyle = "#FFFFFF";
+		context.fillStyle = this.colorToStyle(color);
+		context.strokeStyle = "#FFEEFF";
+		context.lineWidth = 0.7;
 		context.beginPath();
-		context.arc(location[0] * this.spacing + this.spacing / 2, location[1] * this.spacing + this.spacing / 2, this.spacing / 2.5, 0, 2 * Math.PI);
+		context.arc(location[0] * this.spacing + this.spacing / 2, location[1] * this.spacing + this.spacing / 2, this.spacing / 2.6, 0, 2 * Math.PI);
 		context.fill();
 		context.stroke();
 	},
 
 	drawBlock: function(context, location, player) {
-		const scale = 0.92;
+
+		var scale = 1.07;
+		context.save();
+		context.beginPath();
+		var block_x = location[0] * this.spacing + this.spacing * (1 - scale) / 2;
+		var block_y = location[1] * this.spacing + this.spacing * (1 - scale) / 2;
+		var block_size = this.spacing * scale;
+		context.rect(block_x, block_y, block_size, block_size);
+		context.clip();
+		
+		context.drawImage(this.backgroundImage, block_x, block_y, block_size, block_size, block_x, block_y, block_size, block_size);
+
+		var scale = 1.1;
+		context.beginPath();
+		context.rect(location[0] * this.spacing + this.spacing * (1 - scale) / 2, location[1] * this.spacing + this.spacing * (1 - scale) / 2, this.spacing * scale, this.spacing * scale);
+
+		var trail = this.trail[location[1]][location[0]];
+		for (var i = 0; i < trail.length; ++i) {
+			context.fillStyle = this.colorToStyle(this.interpolateColor(this.colors[trail[i][0]], this.trailColor, trail[i][1])
+								                  .concat(this.trailAlpha * Math.pow((i + 1) / trail.length, 0.7)));
+			context.fill();
+		}
+		
+		context.strokeStyle = "#101020";
+		context.lineWidth = 3.5;
+		context.lineJoin = "miter";
+		context.stroke();
+	
 		if(this.board[location[1]][location[0]]) {
-			context.strokeStyle = "#001144";
+			var scale = 0.95;
+			context.strokeStyle = "#201144";
+			context.lineWidth = 2;
 			context.fillStyle = "#9977B0";
 			context.beginPath();
 			context.rect(location[0] * this.spacing + this.spacing * (1 - scale) / 2, location[1] * this.spacing + this.spacing * (1 - scale) / 2, this.spacing * scale, this.spacing * scale);
 			context.fill();
 			context.stroke();
-		} else {
-			context.save();
-			context.beginPath();
-			context.rect(location[0] * this.spacing + this.spacing * (1 - scale) / 2, location[1] * this.spacing + this.spacing * (1 - scale) / 2, this.spacing * scale, this.spacing * scale);
-			context.fillStyle = this.colorToHex(this.backgroundColor);w
-			context.fill();
-			context.clip();
-			this.drawText(context);
-			context.restore();
 		}
+
+		if (location == this.loc[0] && location == this.loc[1]) {
+			for (var player = 0; player < 2; ++player) {
+				this.drawPlayer(context, this.loc[player], this.colors[player].concat(0.3));
+			}
+		} else {
+			for (var player = 0; player < 2; ++player) {
+				if (location == this.loc[player]) {
+					this.drawPlayer(context, this.loc[player], this.colors[player]);
+				}
+			}
+		}
+
+		context.restore();
+
 	},
 
 	getContext: function() {
@@ -219,8 +258,19 @@ visualizer = {
 		        Math.floor(color1[2] * (1 - weight) + color2[2] * weight)];
 	},
 
-	colorToHex: function(color) {
-		return '#' + (0x1000000 + color[0]*0x10000 + color[1]*0x100 + color[2]).toString(16).substring(1);
+	colorToStyle: function(color) {
+		if (color.length == 3) {
+			return '#' + (0x1000000 + color[0]*0x10000 + color[1]*0x100 + color[2]).toString(16).substring(1);
+		} else {
+			return "rgba(" + color[0].toString() + ", " + color[1].toString() + ", " + color[2].toString() + ", " + color[3].toString() + ")";
+		}
+	},
+
+	getTrailBlend: function(moves) {
+		const mean = 0.3;
+		const amp = 0.15;
+		const period = 20;
+		return Math.pow(mean + amp * Math.sin(moves * 2 * Math.PI / period), 1.6);
 	},
 
 	move: function() {
@@ -234,8 +284,11 @@ visualizer = {
 			this.next(); // to
 			var x = this.nextInt();
 			var y = this.nextInt();
-			this.drawBlock(context, this.loc[player])
+			var oldLoc = this.loc[player];
 			this.loc[player] = [x, y];
+			this.drawBlock(context, oldLoc)
+			this.moves[player] += 1;
+			this.trail[y][x].push([player, this.getTrailBlend(this.moves[player])]);
 			this.drawPlayer(context, this.loc[player], this.colors[player]);
 			setTimeout($.proxy(this.move, this), this.timeout);
 		
@@ -248,9 +301,10 @@ visualizer = {
 
 		} else {
 
-			this.drawText(context, player);
-			context.fillStyle = "rgba(0, 0, 0, 0.65)";
+			context.fillStyle = "rgba(0, 0, 0, 0.35)";
 			context.fillRect(0, 0, this.size, this.size);
+
+			this.drawText(context, player);
 
 		}
 
