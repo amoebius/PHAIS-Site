@@ -4,6 +4,31 @@
   Visualizer!
 {% endblock title %}
 
+{% block styles %}
+  
+  {{ super() }}
+
+  <style>
+  
+    .horizontal-flip {
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+    }
+
+    .slider-handle {
+      background-image:-webkit-linear-gradient(top,#3030a0 0,#6050c0 100%);
+      background-image:linear-gradient(to bottom,#3030a0 0,#6050c0 100%);
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3010a0',endColorstr='#ff305080',GradientType=0);
+    }
+
+  </style>
+
+{% endblock styles %}
+
 
 {% block content %}
   
@@ -12,7 +37,29 @@
   </div>
 
   <div class="container-fluid" align="center" style="padding: 20px; margin-bottom: 30px;">
-    <canvas id="visualization"></canvas>
+    <div>
+      <canvas id="visualization"></canvas>
+    </div>
+    <div style="padding: 5px; display: inline-flex;">
+      <div id="moveSlider" class="slider" data-slider-min="0" data-slider-max="0" data-slider-value="0" data-slider-step="1" data-slider-handle="square" data-slider-selection="none"></div>
+    </div>
+    <div style="padding-top: 20px;">
+      <span>
+        <button type="button" class="btn btn-default btn-sm horizontal-flip" onclick="rewind()">
+          <span class="glyphicon glyphicon-play"></span>
+        </button>
+        <button type="button" class="btn btn-default btn-sm" onclick="pause()">
+          <span class="glyphicon glyphicon-pause"></span>
+        </button>
+        <button type="button" class="btn btn-default btn-sm" onclick="play()">
+          <span class="glyphicon glyphicon-play"></span>
+        </button>
+      </span>
+      <span style="padding-left: 20px">
+        <label for="speedSlider">Speed:</label>
+        <div id="speedSlider" class="slider" data-slider-min="0" data-slider-max="1" data-slider-value="0.5" data-slider-step="0.001" style="width: 200px"></div>
+      </span>
+    </div>
   </div>
 
 {% endblock content %}
@@ -23,25 +70,126 @@
   {{ super() }}
 
   <script src="/static/js/blockade/visualizer.js"></script>
-  
+  <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+
   <script type="text/javascript">
-    // TODO: HOST FONT MYSELF IN /static/
-    // TODO: Host jquery myself?  Just need to wget it from google
-    // TODO: Wait until font has loaded before progressing to game visualisation.
-  WebFontConfig = {
-    google: { families: [ 'Six+Caps::latin' ] }
-  };
-  (function() {
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'false';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-  })(); </script>
-  <script>
-    visualizer.run($('#visualization')[0], '{{ log }}', 700, 100);
+    
+    var width = 780;
+    var timer = null;
+    var current = null;
+    var timeout = 0;
+    var preDragState = null;
+
+    var getTimeout = function(value) {
+      return 333.0 * Math.pow(1.0 - value, 2.0) + 1.0;
+    };
+    timeout = getTimeout(0.5);
+
+
+    $('#speedSlider').slider({
+      
+      id: "speedSliderInstance",
+
+      formater:  function(value) {
+        var perSecond = Math.round(1000.0 / getTimeout(value));
+        return perSecond.toString() + ' moves/second';
+      },
+      
+    }).on('slide slideStart', function(e) {
+      timeout = getTimeout(e.value);
+    });
+
+
+    $('#moveSlider').css('width', (width - 50).toString() + 'px');
+
+    $('#moveSlider').slider({
+
+      formater: function(value) {
+        return 'Turn ' + value.toString();
+      },
+
+    }).on('slide', function(e) {
+      visualizer.seek(e.value);
+    }).on('slideStart', function(e) {
+      preDragState = current;
+      if (preDragState != null) {
+        pause();
+      }
+      visualizer.seek(e.value);
+    }).on('slideStop', function(e) {
+      if (preDragState != null) {
+        if (preDragState == 'play') {
+          play();
+        } else if (preDragState == 'rewind') {
+          rewind();
+        }
+        preDragState = null;
+      }
+    });
+
+    var updateMoveSlider = function() {
+      $('#moveSlider').slider('setValue', visualizer.moveIndex);
+    };
+
+
+
+    var moveForward = function() {
+      if (visualizer.moveIndex == visualizer.numMoves) {
+        pause();
+        return;
+      }
+      var start = performance.now();
+      visualizer.moveForward();
+      updateMoveSlider();
+      timer = setTimeout(moveForward, Math.max(timeout + start - performance.now(), 0));
+    };
+
+    var moveBackward = function() {
+      if (visualizer.moveIndex == 0) {
+        pause();
+        return;
+      }
+      var start = performance.now();
+      visualizer.moveBackward();
+      updateMoveSlider();
+      timer = setTimeout(moveBackward, Math.max(timeout + start - performance.now(), 0));
+    }
+
+    var play = function() {
+      if (current != 'play') {
+        if (timer != null) {
+          clearInterval(timer);
+        }
+        current = 'play';
+        timer = setTimeout(moveForward, timeout);
+      }
+    };
+
+    var rewind = function() {
+      if (current != 'rewind') {
+        if (timer != null) {
+          clearInterval(timer);
+        }
+        current = 'rewind';
+        timer = setTimeout(moveBackward, timeout);
+      }
+    };
+
+    var pause = function() {
+      if (current != null) {
+        current = null;
+      }
+      if (timer != null) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    visualizer.run($('#visualization')[0], '{{ log }}', width, function() {
+      $('#moveSlider').slider('setAttribute', 'max', visualizer.numMoves);
+      play();
+    });
+
   </script>
 
 {% endblock scripts %}
