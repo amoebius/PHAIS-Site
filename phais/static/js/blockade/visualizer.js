@@ -43,6 +43,10 @@ visualizer = {
 
 	run: function(canvas, log, size, callback) {
 		
+		this.canvas = canvas;
+		this.canvas.width = size;
+		this.canvas.height = size;
+
 		this.parseLog(log);
 
 		this.board = []
@@ -73,40 +77,34 @@ visualizer = {
 		}
 		this.invalidatedBlocks = [];
 
-		this.canvas = canvas;
-		this.resize(size);
-		
+		this.backgroundImage = document.createElement("canvas");
 		
 		WebFont.load({
-			
-			google: {
-				families: ['Six Caps'],
+			custom: {
+				families: ["Six Caps"],
+				urls: ["/static/css/fonts/sixcaps.css"],
 			},
 
 			active: $.proxy(function() {
-			
-				this.backgroundImage = document.createElement("canvas");
-				this.backgroundImage.width = this.size;
-				this.backgroundImage.height = this.size;
-				var bg_context = this.backgroundImage.getContext("2d");
-
-	      		grd = bg_context.createLinearGradient(0.000, 78.000, this.size, this.size);
-	      		grd.addColorStop(0, 'rgba(20, 32, 40, 1.000)');
-	      		grd.addColorStop(1, 'rgba(25, 12, 32, 1.000)');
-	      		bg_context.fillStyle = grd;
-				
-				bg_context.fillRect(0, 0, this.size, this.size);
-				this.drawText(bg_context);
-
-				this.invalidate();
-				this.redraw();
-
+				this.resize(size);
 				callback();
-
 			}, this),
-
 		});
 
+	},
+
+	redrawBackground: function() {
+		this.backgroundImage.width = this.size;
+		this.backgroundImage.height = this.size;
+		var bg_context = this.backgroundImage.getContext("2d");
+
+		grd = bg_context.createLinearGradient(0.000, 78.000, this.size, this.size);
+		grd.addColorStop(0, 'rgba(20, 32, 40, 1.000)');
+		grd.addColorStop(1, 'rgba(25, 12, 32, 1.000)');
+		bg_context.fillStyle = grd;
+
+		bg_context.fillRect(0, 0, this.size, this.size);
+		this.drawText(bg_context);
 	},
 
 	resize: function(size) {
@@ -114,14 +112,18 @@ visualizer = {
 		this.canvas.width = this.size;
 		this.canvas.height = this.size;
 		this.spacing = this.size * 1.0 / this.boardSize + this.epsilon;
-		this.textStyle = (this.size / 4.5).toString() + "px bold sans-serif 'Six Caps'";
+		this.fontStyle = (this.size / 4.5).toString() + "px 'Six Caps'";
+		this.redrawBackground();
 		this.invalidate();
+		this.redraw();
 	},
 
 	drawText: function(context, winner) {
-		context.font = this.textStyle;
 		context.strokeStyle = "rgb(60,60,100)";
+		context.font = this.fontStyle;
 		context.lineWidth = 1;
+		context.lineJoin = "miter";
+		context.miterLimit = 2;
 		const translucency = 0.9;
 		const winTranslucency = 0.1;
 		const winBrightness = 0.4;
@@ -178,6 +180,9 @@ visualizer = {
 		context.fillText("versus", this.size * 0.5, this.size * 0.5);
 		context.strokeText("versus", this.size * 0.5, this.size * 0.5);
 
+
+		context.beginPath();
+
 	},
 
 	drawPlayer: function(context, location, color) {
@@ -208,7 +213,7 @@ visualizer = {
 		var trail = this.trail[location[1]][location[0]];
 		for (var i = 0; i < trail.length; ++i) {
 			context.fillStyle = this.colorToStyle(this.interpolateColor(this.colors[trail[i][0]], this.trailColor, trail[i][1])
-								                  .concat(this.trailAlpha * Math.pow((i + 1) / trail.length, 0.5)));
+												  .concat(this.trailAlpha * Math.pow((i + 1) / trail.length, 0.5)));
 			context.fill();
 		}
 		
@@ -260,8 +265,8 @@ visualizer = {
 
 	interpolateColor: function(color1, color2, weight) {
 		return [Math.floor(color1[0] * (1 - weight) + color2[0] * weight),
-		        Math.floor(color1[1] * (1 - weight) + color2[1] * weight),
-		        Math.floor(color1[2] * (1 - weight) + color2[2] * weight)];
+				Math.floor(color1[1] * (1 - weight) + color2[1] * weight),
+				Math.floor(color1[2] * (1 - weight) + color2[2] * weight)];
 	},
 
 	arrayEqual: function(a, b) {

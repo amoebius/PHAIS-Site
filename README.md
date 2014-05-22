@@ -20,6 +20,7 @@ Current dependencies:
 - Python 2.x
 - Flask
 - MySQLdb https://github.com/farcepest/MySQLdb1 (though easily adaptable to use any compatible database api)
+- Sliders https://github.com/seiyria/bootstrap-slider
 
 Future dependencies:
 - Flask-Login https://github.com/maxcountryman/flask-login

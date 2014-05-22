@@ -25,6 +25,17 @@
       filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3010a0',endColorstr='#ff305080',GradientType=0);
     }
 
+    .unselectable {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+    }
+
   </style>
 
 {% endblock styles %}
@@ -36,31 +47,44 @@
     <h2>Game Visualization</h2>
   </div>
 
-  <div class="container-fluid" align="center" style="padding: 20px; margin-bottom: 30px;">
-    <div>
-      <canvas id="visualization"></canvas>
-    </div>
-    <div style="padding: 5px; display: inline-flex;">
-      <div id="moveSlider" class="slider" data-slider-min="0" data-slider-max="0" data-slider-value="0" data-slider-step="1" data-slider-handle="square" data-slider-selection="none"></div>
-    </div>
-    <div style="padding-top: 20px;">
-      <span>
-        <button type="button" class="btn btn-default btn-sm horizontal-flip" onclick="rewind()">
-          <span class="glyphicon glyphicon-play"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-sm" onclick="pause()">
-          <span class="glyphicon glyphicon-pause"></span>
-        </button>
-        <button type="button" class="btn btn-default btn-sm" onclick="play()">
-          <span class="glyphicon glyphicon-play"></span>
-        </button>
-      </span>
-      <span style="padding-left: 20px">
-        <label for="speedSlider">Speed:</label>
-        <div id="speedSlider" class="slider" data-slider-min="0" data-slider-max="1" data-slider-value="0.5" data-slider-step="0.001" style="width: 200px"></div>
-      </span>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 unselectable" align="center" style="padding: 5px;">
+        <div style="display: inline-block; background-color: rgb(215, 210, 215); padding: 10px;">
+          <div style="padding: 10px 10px 5px 10px; background-color: #040206; display: inline-block;">
+            <canvas id="visualization"></canvas>
+          </div>
+          <div style="padding-top: 5px; padding-bottom: 25px;">
+            <div id="moveSlider" class="slider" data-slider-min="0" data-slider-max="0" data-slider-value="0" data-slider-step="1" data-slider-handle="square" data-slider-selection="none"></div>
+          </div>
+          <div>
+            <span>
+              <button type="button" class="btn btn-default btn-sm horizontal-flip" onclick="rewind()">
+                <span class="glyphicon glyphicon-play"></span>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" onclick="pause()">
+                <span class="glyphicon glyphicon-pause"></span>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" onclick="play()">
+                <span class="glyphicon glyphicon-play"></span>
+              </button>
+            </span>
+            <span style="padding-left: 20px">
+              <label for="speedSlider"> Speed: </label>
+              <div id="speedSlider" class="slider" data-slider-min="0" data-slider-max="1" data-slider-value="0.5" data-slider-step="0.001" style="width: 200px"></div>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        Text!
+      </div>
     </div>
   </div>
+
+
+  <!-- Dodgy hack to make 'Six Caps' webfont load before the visualiser starts -->
+  <div style="position: absolute; left: -10000px; top: -10000; font-family: 'Six Caps';">HIII</div>
 
 {% endblock content %}
 
@@ -69,12 +93,13 @@
   
   {{ super() }}
 
-  <script src="/static/js/blockade/visualizer.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+
+  <script src="/static/js/blockade/visualizer.js"></script>
 
   <script type="text/javascript">
     
-    var width = 780;
+    var width = window.innerHeight - 200;
     var timer = null;
     var current = null;
     var timeout = 0;
@@ -138,10 +163,16 @@
         pause();
         return;
       }
-      var start = performance.now();
-      visualizer.moveForward();
-      updateMoveSlider();
-      timer = setTimeout(moveForward, Math.max(timeout + start - performance.now(), 0));
+      try {
+        var start = performance.now();
+        visualizer.moveForward();
+        updateMoveSlider();
+        timer = setTimeout(moveForward, Math.max(timeout + start - performance.now(), 0));
+      } catch (ReferenceError) {
+        visualizer.moveForward();
+        updateMoveSlider();
+        timer = setTimeout(moveForward, timeout);
+      }
     };
 
     var moveBackward = function() {
@@ -149,10 +180,16 @@
         pause();
         return;
       }
-      var start = performance.now();
-      visualizer.moveBackward();
-      updateMoveSlider();
-      timer = setTimeout(moveBackward, Math.max(timeout + start - performance.now(), 0));
+      try {
+        var start = performance.now();
+        visualizer.moveBackward();
+        updateMoveSlider();
+        timer = setTimeout(moveBackward, Math.max(timeout + start - performance.now(), 0));
+      } catch (ReferenceError) {
+        visualizer.moveBackward();
+        updateMoveSlider();
+        timer = setTimeout(moveBackward, timeout);
+      }
     }
 
     var play = function() {
