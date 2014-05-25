@@ -64,9 +64,6 @@ visualizer = {
 				this.trail[y].push([]);
 			}
 		}
-		for (var player = 0; player < 2; ++player) {
-			this.addTrail(player);
-		}
 
 		this.blockInvalidated = [];
 		for (var y = 0; y < this.boardSize; ++y) {
@@ -76,6 +73,10 @@ visualizer = {
 			}
 		}
 		this.invalidatedBlocks = [];
+
+		for (var player = 0; player < 2; ++player) {
+			this.addTrail(player);
+		}
 
 		this.backgroundImage = document.createElement("canvas");
 		
